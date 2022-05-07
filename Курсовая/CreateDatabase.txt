@@ -1,12 +1,20 @@
-CREATE DATABASE danil2
-GO
 Use danil2
+GO
+CREATE TABLE Speciality (
+	IDSpeciality integer primary key not null,
+	SpecialityName varchar(100) not null
+)
 GO
 CREATE TABLE [Group] (
 	IDGroup integer primary key NOT NULL,
 	Course integer NOT NULL,
-	Speciality nvarchar(150) NOT NULL,
- 
+	Speciality int NOT NULL,
+	FOREIGN KEY (Speciality) references Speciality(IDSpeciality) 
+)
+GO
+CREATE TABLE Sex(
+	SexID INT PRIMARY KEY NOT NULL,
+	SexName varchar (20) NOT NULL,
 )
 GO
 CREATE TABLE [Student] (
@@ -14,9 +22,10 @@ CREATE TABLE [Student] (
 	[Name] nvarchar(50) NOT NULL,
 	Surname nvarchar(50) NOT NULL,
 	Patronymic nvarchar(50) NOT NULL,
-	Sex nvarchar(10) NOT NULL,
+	Sex int NOT NULL,
 	[Group] integer NOT NULL,
 	[Password] nvarchar(100) NOT NULL,
+	FOREIGN KEY (Sex) references Sex(SexID),
 	Foreign key ([Group]) references [Group](IDGroup)
 )
 GO
@@ -25,23 +34,30 @@ CREATE TABLE [Teacher] (
 	[Name] nvarchar(50) NOT NULL,
 	Surname nvarchar(50) NOT NULL,
 	Patronymic nvarchar(50) NOT NULL,
-	Sex nvarchar(10) NOT NULL,
+	Sex int NOT NULL,
 	[Password] nvarchar(100) NOT NULL,
 	[Role] nvarchar(50) NOT NULL,
-
+	FOREIGN KEY (Sex) references Sex(SexID)
 )
 GO
 CREATE TABLE [Subject] (
 	SubjectID integer primary key NOT NULL,
 	SubjectName nvarchar(50) NOT NULL,
 )
+
+CREATE TABLE Theme(
+	ThemeID INT PRIMARY KEY NOT NULL,
+	ThemeName varchar(150) not null,
+	[Subject] int not null,
+	Foreign key ([Subject]) references [Subject](SubjectID)
+)
 GO
 CREATE TABLE [Question] (
 	QuestionsID integer primary key NOT NULL,
 	Question text NOT NULL,
-	[Subject] integer NOT NULL,
 	Teacher integer NOT NULL,
-	Foreign key ([Subject]) references [Subject](SubjectID),
+	[Subject] integer NOT NULL,
+	FOREIGN KEY ([Subject]) references [Subject](SubjectID),
 	Foreign key (Teacher) references Teacher(PersonnelNumber)
 )
 GO
@@ -54,11 +70,14 @@ GO
 CREATE TABLE [Option] (
 	[Option] integer NOT NULL,
 	Question integer NOT NULL,
+	Theme integer NOT NULL,
 	Foreign key ([Option]) references OptionText(IDOptionText),
 	Foreign key (Question) references Question(QuestionsID),
-	Primary key([Option],Question)
+	Foreign key (Theme) references Theme(ThemeID),
+	Primary key([Option],Question,Theme)
 )
 GO
+
 CREATE TABLE [Lesson] (
 	LessonID integer primary key NOT NULL,
 	[Date] date NOT NULL,
@@ -71,40 +90,52 @@ CREATE TABLE [Lesson] (
 	Foreign key (Teacher) references Teacher(PersonnelNumber)
 )
 GO
+
 CREATE TABLE [Admininstrator](
 	NameAdmininstrator nvarchar(50) primary key not null,
 	[Password] varchar(50) not null
 )
 GO
+
+INSERT INTO Sex (SexID,SexName) VALUES
+(1, 'муж'),
+(2, 'жен')
+GO
+
+INSERT INTO Speciality (IDSpeciality, SpecialityName) VALUES
+('1','Информационнные системы и программирование'),
+('2','Экономическая безопасность')
+GO
+
 INSERT INTO  [Group] (IDGroup,Course,Speciality) VALUES
-('163', '1', N'Информационные системы и программирование'),
-('263', '2', N'Информационные системы и программирование'),
-('363', '3', N'Информационные системы и программирование'),
-('463', '4', N'Информационные системы и программирование'),
-('1063', '1', N'Экономичексая безопасность'),
-('2063', '2', N'Экономичексая безопасность'),
-('3063', '3', N'Экономичексая безопасность')
+('163', '1', '1'),
+('263', '2', '1'),
+('363', '3', '1'),
+('463', '4', '1'),
+('1063', '1', '2'),
+('2063', '2', '2'),
+('3063', '3', '2')
 GO
 
 INSERT INTO Student(StudentTicket, [Name], Surname, Patronymic, Sex, [Group], [Password]) VALUES
-('1019', N'Анна', N'Кондрашова', N'Глебовна', 'жен.','163','group163'),
-('1071', N'Кирилл', N'Смирнов', N'Матвеевич', 'муж.', '163','group163'),
-('1143', N'Эмма', N'Егорова', N'Тимофеевна', 'жен.', '263', 'group263'),
-('1222', N'Кира', N'Медведева', N'Романовна','жен.', '263', 'group263'),
-('1308', N'Андрей', N'Федосеев', N'Дмитриевич','муж.', '363', 'group363'),
-('1374', N'Диана', N'Беспалова', N'Кирилловна','жен.', '363', 'group363'),
-('1407', N'Андрей', N'Иванов', N'Тимофеевич','муж.',  '2063', 'group2063'),
-('1418', N'Евгений', N'Майоров', N'Игоревич','муж.', '2063', 'group2063'),
-('1749', N'Оксана', N'Ерёмина', N'Владимировна','жен.', '2063','group2063'),
-('1878', N'Максим', N'Кузнецов', N'Кириллович','муж.', '2063', 'group2063')
+('1019', N'Анна', N'Кондрашова', N'Глебовна', '2','163','group163'),
+('1071', N'Кирилл', N'Смирнов', N'Матвеевич', '1', '163','group163'),
+('1143', N'Эмма', N'Егорова', N'Тимофеевна', '2', '263', 'group263'),
+('1222', N'Кира', N'Медведева', N'Романовна','2', '263', 'group263'),
+('1308', N'Андрей', N'Федосеев', N'Дмитриевич','1', '363', 'group363'),
+('1374', N'Диана', N'Беспалова', N'Кирилловна','2', '363', 'group363'),
+('1407', N'Андрей', N'Иванов', N'Тимофеевич','1',  '2063', 'group2063'),
+('1418', N'Евгений', N'Майоров', N'Игоревич','1', '2063', 'group2063'),
+('1749', N'Оксана', N'Ерёмина', N'Владимировна','2', '2063','group2063'),
+('1878', N'Максим', N'Кузнецов', N'Кириллович','1', '2063', 'group2063')
 GO
 
-INSERT INTO Teacher(PersonnelNumber, [Name], Surname, Patronymic, Sex, [Password], [Role]) VALUES
-('1163', N'Евгений', N'Майоров', N'Игоревич','qwerty123', 'муж.', N'Преподаватель'),
-('1181', N'Юрий', N'Майоров', N'Игоревич','qwerty123', 'муж.', N'Преподаватель'),
-('1249', N'Владимир', N'Майоров', N'Игоревич','qwerty123', 'муж.', N'Преподаватель'),
-('1282', N'Данил', N'Майоров', N'Игоревич','qwerty123', 'муж.', N'Преподаватель'),
-('1422', N'Данзан', N'Майоров', N'Игоревич','qwerty123', 'муж.', N'Преподаватель')
+INSERT INTO Teacher(PersonnelNumber, [Name], Surname, Patronymic, [Password], Sex, [Role]) VALUES
+('1163', N'Евгений', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
+('1181', N'Юрий', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
+('1249', N'Владимир', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
+('1282', N'Данил', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
+('1422', N'Данзан', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель')
 GO
 
 INSERT INTO [Subject](SubjectID,SubjectName) VALUES 
@@ -113,6 +144,11 @@ INSERT INTO [Subject](SubjectID,SubjectName) VALUES
 (3, N'Математика'),
 (4, N'Химия'),
 (5, N'История')
+GO
+
+INSERT INTO Theme (ThemeID, ThemeName, [Subject]) VALUES
+('1','Смутное время','5')
+GO
 
 INSERT INTO [Question] (QuestionsID, Question, [Subject], Teacher) VALUES
 (1, N'Назовите одну из причин Смутного времени:', '5', '1163'),
@@ -138,21 +174,23 @@ INSERT INTO OptionText(IDOptionText, Answer, TrueFalse) VALUES
 ('14', N'Первого ополчения', 'True'),
 ('15', N'Второго ополчения', 'False'),
 ('16', N'Михаила Фёдоровича Романова', 'False')
+GO
 
-INSERT INTO [Option]([Option],Question) VALUES 
-(1,1),
-(2,1),
-(3,1),
-(4,1),
-(5,2),
-(6,2),
-(7,2),
-(8,2),
-(9,3),
-(10,3),
-(11,3),
-(12,3),
-(13,4),
-(14,4),
-(15,4),
-(16,4)
+INSERT INTO [Option]([Option], Question, Theme) VALUES 
+(1,1, 1),
+(2,1, 1),
+(3,1, 1),
+(4,1, 1),
+(5,2, 1),
+(6,2, 1),
+(7,2, 1),
+(8,2, 1),
+(9,3, 1),
+(10,3, 1),
+(11,3, 1),
+(12,3, 1),
+(13,4, 1),
+(14,4, 1),
+(15,4, 1),
+(16,4, 1)
+GO

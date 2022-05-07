@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AppTasks.Database; 
+using AppTasks.Database;
 
 namespace AppTasks.Pages
 {
@@ -21,14 +21,14 @@ namespace AppTasks.Pages
     /// </summary>
     public partial class mainPage : Page
     {
-        
-        danil2Entities connection = new danil2Entities();
+
+        danil2Entities2 connection = new danil2Entities2();
         public mainPage()
         {
             InitializeComponent();
 #if DEBUG
-            textBoxLogin.Text = "admin";
-            passwordBoxPassword.Password = "adminboss";
+            textBoxLogin.Text = "1019";
+            passwordBoxPassword.Password = "group163";
 #endif
         }
         void ClearElements()
@@ -38,57 +38,51 @@ namespace AppTasks.Pages
         }
         private void Button_Click(object sender, RoutedEventArgs e) //ВХОД
         {
-            string login = textBoxLogin.Text.Trim();
-            string password = passwordBoxPassword.Password.Trim();
-            var student = connection.Student.ToList();
-            var teacher = connection.Teacher.ToList();
-            var admin = connection.Admininstrator.ToList();
             int tryExit = 0;
-            foreach (var _student in student)
+            try
             {
-                if (login == _student.StudentTicket.ToString())
+                int login = int.Parse(textBoxLogin.Text.Trim());
+                string password = passwordBoxPassword.Password.Trim();
+                var student = connection.Student.Where(s => s.StudentTicket == login && s.Password == password).FirstOrDefault();
+
+                if (student != null)
                 {
-                    if (password==_student.Password)
-                    {
-                        ClearElements();
-                        NavigationService.Navigate(MainWindow.pageStudentPage);
-                        tryExit++;
-                        return;
-                    }
+                    ClearElements();
+                    MainWindow.pageStudentPage.SetStudent(student);
+                    NavigationService.Navigate(MainWindow.pageStudentPage);
+                    tryExit++;
+                    return;
+                }
+                var teacher = connection.Teacher.Where(t => t.PersonnelNumber == login && t.Password == password).FirstOrDefault();
+                if (teacher != null)
+                {
+                    ClearElements();
+                    NavigationService.Navigate(MainWindow.pageTeacherPage);
+                    tryExit++;
+                    return;
                 }
             }
-            foreach (var _teacher in teacher)
+            catch (Exception)
             {
-                if (login==_teacher.PersonnelNumber.ToString())
+                string login = (textBoxLogin.Text.Trim());
+                string password = passwordBoxPassword.Password.Trim();
+                var admin = connection.Admininstrator.Where(a => a.NameAdmininstrator == login.ToString() && a.Password == password).FirstOrDefault();
+                if (admin != null)
                 {
-                    if (password==_teacher.Password)
-                    {
-                        ClearElements();
-                        NavigationService.Navigate(MainWindow.pageTeacherPage);
-                        tryExit++;
-                        return;
-                    }
+                    ClearElements();
+                    NavigationService.Navigate(MainWindow.pageAdministrationPage);
+                    return;
                 }
-            }
-            foreach (var _admin in admin)
-            {
-                if (login==_admin.NameAdmininstrator)
+                if (tryExit == 0)
                 {
-                    if (password==_admin.Password)
-                    {
-                        ClearElements();
-                        NavigationService.Navigate(MainWindow.pageAdministrationPage);
-                        return;
-                    }
+                    MessageBox.Show("Данные введены некорректно");
                 }
-            }
-            if (tryExit==0)
-            {
-                MessageBox.Show("Данные введены некорректно");
             }
             
-        }
 
+           
+
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)//ВЫХОД
         {
             MainWindow.Instance.Close();

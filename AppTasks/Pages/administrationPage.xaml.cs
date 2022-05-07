@@ -25,13 +25,17 @@ namespace AppTasks.Pages
         public List <Database.Teacher> teachers { get; set; }
         public Database.Student student { get; set; }
         public List <Database.Student> students { get; set; }
+        public List <Database.Sex> sexes { get; set; }
 
-        danil2Entities connection = new danil2Entities();
+
+
+        danil2Entities2 connection = new danil2Entities2();
         public administrationPage()
         {
             InitializeComponent();
             LoadTeacher();
             LoadSex();
+            LoadStudent();
             teachers = connection.Teacher.ToList();
             students = connection.Student.ToList();
             DataContext = this;
@@ -44,14 +48,31 @@ namespace AppTasks.Pages
                 listBoxTeacher.Items.Add(teacher);
             }
         }
-        void ClearTextBoxTeacher()
+        void LoadStudent()
+        {
+            var students = connection.Student.ToList();
+            foreach (var student in students)
+            {
+                listBoxStudent.Items.Add(student);
+            }
+        }
+        void ClearTextBox()
         {
             textBoxLoginTeacher.Clear();
             textBoxNameTeacher.Clear();
             textBoxPasswordTeacher.Clear();
             textBoxPatronymicTeacher.Clear();
             textBoxSurnameTeacher.Clear();
-            comboBoxSexTeacher.Items.Clear();
+            comboBoxSexTeacher.SelectedIndex = -1;
+
+            textBoxGroupStudent.Clear();
+            textBoxLoginStudent.Clear();
+            textBoxSurnameStudent.Clear();
+            textBoxPatronymicStudent.Clear();
+            textBoxNameStudent.Clear();
+            textBoxPasswordStudent.Clear();
+            textBoxSpecialityStudent.Clear();
+            comboBoxSexStudent.SelectedIndex = -1;
         }
         void LoadUsersTeacher()
         {
@@ -66,13 +87,23 @@ namespace AppTasks.Pages
                 sex.UpdateTarget();
             }
         }
-        void LoadSex()//НЕ РАБОТАЕТ
+        void LoadUsersStudent()
         {
-            var sex = connection.Teacher.ToList();
-            foreach (var _sex in sex)
+            textBoxSurnameStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            textBoxNameStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            textBoxPatronymicStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            textBoxLoginStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            textBoxPasswordStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            textBoxGroupStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            var sex = comboBoxSexStudent.GetBindingExpression(ComboBox.SelectedItemProperty);
+            if (sex != null)
             {
-                comboBoxSexTeacher.Items.Add(_sex.Sex);
+                sex.UpdateTarget();
             }
+        }
+        void LoadSex()
+        {
+            sexes = connection.Sex.ToList();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -82,16 +113,33 @@ namespace AppTasks.Pages
                 MessageBox.Show("Данные успешно отредактированы!");
             }
         }
-
-        private void listBoxTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void listBoxTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)//КЛИК ПО ПРЕПОДАВАТЕЛЮ
         {
             teacher = listBoxTeacher.SelectedItem as Database.Teacher;
             LoadUsersTeacher();
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            ClearTextBox();
             NavigationService.GoBack();
+        }
+
+        private void listBoxStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)//КЛИК ПО СТУДЕНТУ
+        {
+            student = listBoxStudent.SelectedItem as Database.Student;
+            LoadUsersStudent();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string surname = textBoxCreateSurnameStudent.Text.Trim();
+            string name = textBoxCreateNameStudent.Text.Trim();
+            string patronymic = textBoxCreatePatronymicStudent.Text.Trim();
+            string group = textBoxCreateGroupStudent.Text.Trim();
+            string login = textBoxCreateStudentTicketStudent.Text.Trim();
+            string password = textBoxCreatePasswordStudent.Text.Trim();
+            //group,sex
+
         }
     }
 }

@@ -21,11 +21,36 @@ namespace AppTasks.Pages
     /// </summary>
     public partial class studentPage : Page
     {
-        danil2Entities connection = new danil2Entities();
+        public static Database.Student student;
+        danil2Entities2 connection = new danil2Entities2();
         public studentPage()
         {
             InitializeComponent();
             LoadSubject();
+            //LoadUser();
+        }
+
+        public void SetStudent(Student s)
+        {
+            student = s;
+            labelRole.Content = s.StudentTicket;
+            labelSurname.Content = s.Surname;
+            labelName.Content = s.Name;
+            labelPatronymic.Content = s.Patronymic;
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri("girl.png");
+            image.EndInit();
+            imageWindow.Source = image;
+        }
+        
+        void ClearElements()
+        {
+            labelRole.Content = "";
+            labelSurname.Content = "";
+            labelName.Content = "";
+            labelPatronymic.Content = "";
+            listBoxLesson.SelectedIndex=-1;
         }
         void LoadSubject()
         {
@@ -35,12 +60,9 @@ namespace AppTasks.Pages
                 listBoxLesson.Items.Add(_subject);
             }
         }
-        void LoadUser()
-        {
-
-        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            ClearElements();
             NavigationService.GoBack();
         }
 
