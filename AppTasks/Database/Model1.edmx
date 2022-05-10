@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище danil2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admininstrator">
+          <Key>
+            <PropertyRef Name="NameAdmininstrator" />
+          </Key>
+          <Property Name="NameAdmininstrator" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="IDGroup" />
+          </Key>
+          <Property Name="IDGroup" Type="int" Nullable="false" />
+          <Property Name="Course" Type="int" Nullable="false" />
+          <Property Name="Speciality" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Lesson" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Group" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="int" Nullable="false" />
+          <Property Name="Teacher" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Option" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="Theme" />
+          </Key>
+          <Property Name="Option" Type="int" Nullable="false" />
+          <Property Name="Question" Type="int" Nullable="false" />
+          <Property Name="Theme" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OptionText">
+          <Key>
+            <PropertyRef Name="IDOptionText" />
+          </Key>
+          <Property Name="IDOptionText" Type="int" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TrueFalse" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionsID" />
+          </Key>
+          <Property Name="QuestionsID" Type="int" Nullable="false" />
+          <Property Name="Question" Type="text" Nullable="false" />
+          <Property Name="Teacher" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="SexID" />
+          </Key>
+          <Property Name="SexID" Type="int" Nullable="false" />
+          <Property Name="SexName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="IDSpeciality" />
+          </Key>
+          <Property Name="IDSpeciality" Type="int" Nullable="false" />
+          <Property Name="SpecialityName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentTicket" />
+          </Key>
+          <Property Name="StudentTicket" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="Group" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="PersonnelNumber" />
+          </Key>
+          <Property Name="PersonnelNumber" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="ThemeID" />
+          </Key>
+          <Property Name="ThemeID" Type="int" Nullable="false" />
+          <Property Name="ThemeName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Subject" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Group__Specialit__4BAC3F29">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="IDSpeciality" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__Group__66603565">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="IDGroup" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__Subject__6754599E">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__Teacher__68487DD7">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Option__Option__619B8048">
+          <End Role="OptionText" Type="Self.OptionText" Multiplicity="1" />
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionText">
+              <PropertyRef Name="IDOptionText" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="Option" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Option__Question__628FA481">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionsID" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="Question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Option__Theme__6383C8BA">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ThemeID" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="Theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__Subjec__5BE2A6F2">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__Teache__5CD6CB2B">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Group__5165187F">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="IDGroup" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Sex__5070F446">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="SexID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__Sex__5441852A">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="SexID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Theme__Subject__59063A47">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище danil2ModelContainer">
+          <EntitySet Name="Admininstrator" EntityType="Self.Admininstrator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Option" EntityType="Self.Option" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OptionText" EntityType="Self.OptionText" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Group__Specialit__4BAC3F29" Association="Self.FK__Group__Specialit__4BAC3F29">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__Group__66603565" Association="Self.FK__Lesson__Group__66603565">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__Subject__6754599E" Association="Self.FK__Lesson__Subject__6754599E">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__Teacher__68487DD7" Association="Self.FK__Lesson__Teacher__68487DD7">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Option__Option__619B8048" Association="Self.FK__Option__Option__619B8048">
+            <End Role="OptionText" EntitySet="OptionText" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Option__Question__628FA481" Association="Self.FK__Option__Question__628FA481">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Option__Theme__6383C8BA" Association="Self.FK__Option__Theme__6383C8BA">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__Subjec__5BE2A6F2" Association="Self.FK__Question__Subjec__5BE2A6F2">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__Teache__5CD6CB2B" Association="Self.FK__Question__Teache__5CD6CB2B">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Group__5165187F" Association="Self.FK__Student__Group__5165187F">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Sex__5070F446" Association="Self.FK__Student__Sex__5070F446">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__Sex__5441852A" Association="Self.FK__Teacher__Sex__5441852A">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Theme__Subject__59063A47" Association="Self.FK__Theme__Subject__59063A47">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Theme" EntitySet="Theme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="danil2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admininstrator">
+          <Key>
+            <PropertyRef Name="NameAdmininstrator" />
+          </Key>
+          <Property Name="NameAdmininstrator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="IDGroup" />
+          </Key>
+          <Property Name="IDGroup" Type="Int32" Nullable="false" />
+          <Property Name="Course" Type="Int32" Nullable="false" />
+          <Property Name="Speciality" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Speciality1" Relationship="Self.FK__Group__Specialit__4BAC3F29" FromRole="Group" ToRole="Speciality" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK__Lesson__Group__66603565" FromRole="Group" ToRole="Lesson" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__Group__5165187F" FromRole="Group" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="LessonID" />
+          </Key>
+          <Property Name="LessonID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Lesson1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Group" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="Int32" Nullable="false" />
+          <Property Name="Teacher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group1" Relationship="Self.FK__Lesson__Group__66603565" FromRole="Lesson" ToRole="Group" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Lesson__Subject__6754599E" FromRole="Lesson" ToRole="Subject" />
+          <NavigationProperty Name="Teacher1" Relationship="Self.FK__Lesson__Teacher__68487DD7" FromRole="Lesson" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Option">
+          <Key>
+            <PropertyRef Name="Option1" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="Theme" />
+          </Key>
+          <Property Name="Option1" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="Int32" Nullable="false" />
+          <Property Name="Theme" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OptionText" Relationship="Self.FK__Option__Option__619B8048" FromRole="Option" ToRole="OptionText" />
+          <NavigationProperty Name="Question1" Relationship="Self.FK__Option__Question__628FA481" FromRole="Option" ToRole="Question" />
+          <NavigationProperty Name="Theme1" Relationship="Self.FK__Option__Theme__6383C8BA" FromRole="Option" ToRole="Theme" />
+        </EntityType>
+        <EntityType Name="OptionText">
+          <Key>
+            <PropertyRef Name="IDOptionText" />
+          </Key>
+          <Property Name="IDOptionText" Type="Int32" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrueFalse" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="Self.FK__Option__Option__619B8048" FromRole="OptionText" ToRole="Option" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionsID" />
+          </Key>
+          <Property Name="QuestionsID" Type="Int32" Nullable="false" />
+          <Property Name="Question1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Teacher" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="Self.FK__Option__Question__628FA481" FromRole="Question" ToRole="Option" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Question__Subjec__5BE2A6F2" FromRole="Question" ToRole="Subject" />
+          <NavigationProperty Name="Teacher1" Relationship="Self.FK__Question__Teache__5CD6CB2B" FromRole="Question" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="SexID" />
+          </Key>
+          <Property Name="SexID" Type="Int32" Nullable="false" />
+          <Property Name="SexName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__Sex__5070F446" FromRole="Sex" ToRole="Student" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__Sex__5441852A" FromRole="Sex" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="IDSpeciality" />
+          </Key>
+          <Property Name="IDSpeciality" Type="Int32" Nullable="false" />
+          <Property Name="SpecialityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__Group__Specialit__4BAC3F29" FromRole="Speciality" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentTicket" />
+          </Key>
+          <Property Name="StudentTicket" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="Group" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Group1" Relationship="Self.FK__Student__Group__5165187F" FromRole="Student" ToRole="Group" />
+          <NavigationProperty Name="Sex1" Relationship="Self.FK__Student__Sex__5070F446" FromRole="Student" ToRole="Sex" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK__Lesson__Subject__6754599E" FromRole="Subject" ToRole="Lesson" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Question__Subjec__5BE2A6F2" FromRole="Subject" ToRole="Question" />
+          <NavigationProperty Name="Theme" Relationship="Self.FK__Theme__Subject__59063A47" FromRole="Subject" ToRole="Theme" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="PersonnelNumber" />
+          </Key>
+          <Property Name="PersonnelNumber" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK__Lesson__Teacher__68487DD7" FromRole="Teacher" ToRole="Lesson" />
+          <NavigationProperty Name="Question" Relationship="Self.FK__Question__Teache__5CD6CB2B" FromRole="Teacher" ToRole="Question" />
+          <NavigationProperty Name="Sex1" Relationship="Self.FK__Teacher__Sex__5441852A" FromRole="Teacher" ToRole="Sex" />
+        </EntityType>
+        <EntityType Name="Theme">
+          <Key>
+            <PropertyRef Name="ThemeID" />
+          </Key>
+          <Property Name="ThemeID" Type="Int32" Nullable="false" />
+          <Property Name="ThemeName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Option" Relationship="Self.FK__Option__Theme__6383C8BA" FromRole="Theme" ToRole="Option" />
+          <NavigationProperty Name="Subject1" Relationship="Self.FK__Theme__Subject__59063A47" FromRole="Theme" ToRole="Subject" />
+        </EntityType>
+        <Association Name="FK__Group__Specialit__4BAC3F29">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="IDSpeciality" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__Group__66603565">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="IDGroup" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Group__5165187F">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="IDGroup" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__Subject__6754599E">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Lesson__Teacher__68487DD7">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Option__Option__619B8048">
+          <End Role="OptionText" Type="Self.OptionText" Multiplicity="1" />
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OptionText">
+              <PropertyRef Name="IDOptionText" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="Option1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Option__Question__628FA481">
+          <End Role="Question" Type="Self.Question" Multiplicity="1" />
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionsID" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="Question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Option__Theme__6383C8BA">
+          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
+          <End Role="Option" Type="Self.Option" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Theme">
+              <PropertyRef Name="ThemeID" />
+            </Principal>
+            <Dependent Role="Option">
+              <PropertyRef Name="Theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__Subjec__5BE2A6F2">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Question__Teache__5CD6CB2B">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="PersonnelNumber" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Sex__5070F446">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="SexID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teacher__Sex__5441852A">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="SexID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="Sex" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Theme__Subject__59063A47">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Theme" Type="Self.Theme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Theme">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="danil2Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admininstrator" EntityType="Self.Admininstrator" />
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" />
+          <EntitySet Name="Option" EntityType="Self.Option" />
+          <EntitySet Name="OptionText" EntityType="Self.OptionText" />
+          <EntitySet Name="Question" EntityType="Self.Question" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" />
+          <EntitySet Name="Speciality" EntityType="Self.Speciality" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="Theme" EntityType="Self.Theme" />
+          <AssociationSet Name="FK__Group__Specialit__4BAC3F29" Association="Self.FK__Group__Specialit__4BAC3F29">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__Group__66603565" Association="Self.FK__Lesson__Group__66603565">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Group__5165187F" Association="Self.FK__Student__Group__5165187F">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__Subject__6754599E" Association="Self.FK__Lesson__Subject__6754599E">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Lesson__Teacher__68487DD7" Association="Self.FK__Lesson__Teacher__68487DD7">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Option__Option__619B8048" Association="Self.FK__Option__Option__619B8048">
+            <End Role="OptionText" EntitySet="OptionText" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Option__Question__628FA481" Association="Self.FK__Option__Question__628FA481">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Option__Theme__6383C8BA" Association="Self.FK__Option__Theme__6383C8BA">
+            <End Role="Theme" EntitySet="Theme" />
+            <End Role="Option" EntitySet="Option" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__Subjec__5BE2A6F2" Association="Self.FK__Question__Subjec__5BE2A6F2">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Question__Teache__5CD6CB2B" Association="Self.FK__Question__Teache__5CD6CB2B">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Sex__5070F446" Association="Self.FK__Student__Sex__5070F446">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teacher__Sex__5441852A" Association="Self.FK__Teacher__Sex__5441852A">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Theme__Subject__59063A47" Association="Self.FK__Theme__Subject__59063A47">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Theme" EntitySet="Theme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище danil2ModelContainer" CdmEntityContainer="danil2Entities2">
+          <EntitySetMapping Name="Admininstrator">
+            <EntityTypeMapping TypeName="danil2Model.Admininstrator">
+              <MappingFragment StoreEntitySet="Admininstrator">
+                <ScalarProperty Name="NameAdmininstrator" ColumnName="NameAdmininstrator" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="danil2Model.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="IDGroup" ColumnName="IDGroup" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Speciality" ColumnName="Speciality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lesson">
+            <EntityTypeMapping TypeName="danil2Model.Lesson">
+              <MappingFragment StoreEntitySet="Lesson">
+                <ScalarProperty Name="LessonID" ColumnName="LessonID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Lesson1" ColumnName="Lesson" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Option">
+            <EntityTypeMapping TypeName="danil2Model.Option">
+              <MappingFragment StoreEntitySet="Option">
+                <ScalarProperty Name="Option1" ColumnName="Option" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OptionText">
+            <EntityTypeMapping TypeName="danil2Model.OptionText">
+              <MappingFragment StoreEntitySet="OptionText">
+                <ScalarProperty Name="IDOptionText" ColumnName="IDOptionText" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="TrueFalse" ColumnName="TrueFalse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="danil2Model.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QuestionsID" ColumnName="QuestionsID" />
+                <ScalarProperty Name="Question1" ColumnName="Question" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sex">
+            <EntityTypeMapping TypeName="danil2Model.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="SexName" ColumnName="SexName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Speciality">
+            <EntityTypeMapping TypeName="danil2Model.Speciality">
+              <MappingFragment StoreEntitySet="Speciality">
+                <ScalarProperty Name="IDSpeciality" ColumnName="IDSpeciality" />
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="danil2Model.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentTicket" ColumnName="StudentTicket" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subject">
+            <EntityTypeMapping TypeName="danil2Model.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="danil2Model.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="PersonnelNumber" ColumnName="PersonnelNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Theme">
+            <EntityTypeMapping TypeName="danil2Model.Theme">
+              <MappingFragment StoreEntitySet="Theme">
+                <ScalarProperty Name="ThemeID" ColumnName="ThemeID" />
+                <ScalarProperty Name="ThemeName" ColumnName="ThemeName" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

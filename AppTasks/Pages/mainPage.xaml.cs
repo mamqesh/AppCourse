@@ -27,8 +27,8 @@ namespace AppTasks.Pages
         {
             InitializeComponent();
 #if DEBUG
-            textBoxLogin.Text = "1019";
-            passwordBoxPassword.Password = "group163";
+            textBoxLogin.Text = "1222";
+            passwordBoxPassword.Password = "group263";
 #endif
         }
         void ClearElements()
@@ -39,17 +39,17 @@ namespace AppTasks.Pages
         private void Button_Click(object sender, RoutedEventArgs e) //ВХОД
         {
             int tryExit = 0;
+            int login = int.Parse(textBoxLogin.Text.Trim());
+            string password = passwordBoxPassword.Password.Trim();
             try
             {
-                int login = int.Parse(textBoxLogin.Text.Trim());
-                string password = passwordBoxPassword.Password.Trim();
                 var student = connection.Student.Where(s => s.StudentTicket == login && s.Password == password).FirstOrDefault();
 
                 if (student != null)
                 {
                     ClearElements();
-                    MainWindow.pageStudentPage.SetStudent(student);
                     NavigationService.Navigate(MainWindow.pageStudentPage);
+                    MainWindow.pageStudentPage.SetStudent(student);
                     tryExit++;
                     return;
                 }
@@ -64,8 +64,6 @@ namespace AppTasks.Pages
             }
             catch (Exception)
             {
-                string login = (textBoxLogin.Text.Trim());
-                string password = passwordBoxPassword.Password.Trim();
                 var admin = connection.Admininstrator.Where(a => a.NameAdmininstrator == login.ToString() && a.Password == password).FirstOrDefault();
                 if (admin != null)
                 {
@@ -78,10 +76,6 @@ namespace AppTasks.Pages
                     MessageBox.Show("Данные введены некорректно");
                 }
             }
-            
-
-           
-
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)//ВЫХОД
         {

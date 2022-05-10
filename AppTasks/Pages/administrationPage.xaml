@@ -56,7 +56,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
-                    <TextBox x:Name="textBoxSearchTeacher" HorizontalAlignment="Left" Height="37" Margin="899,62,0,0" TextWrapping="Wrap" Width="500"
+                    <TextBox x:Name="textBoxSearchTeacher" HorizontalAlignment="Left" Height="37" Margin="899,62,0,0" TextWrapping="Wrap" Width="463"
                         materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
@@ -113,7 +113,7 @@
                     <TextBox x:Name="textBoxCreateSurnameStudent" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Фамилия" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <ComboBox ItemsSource="{Binding sexes}" SelectedItem="{Binding student.Sex1}" x:Name="comboBoxSexStudent_Copy" HorizontalAlignment="Left" Margin="624,62,0,0" VerticalAlignment="Top" Width="106" Height="60"
+                    <ComboBox ItemsSource="{Binding sexes}" SelectedItem="{Binding student.Sex1}" x:Name="comboBoxCreateSexStudent" HorizontalAlignment="Left" Margin="624,62,0,0" VerticalAlignment="Top" Width="106" Height="60"
                         materialDesign:HintAssist.Hint="Пол" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         <ComboBox.ItemTemplate>
@@ -148,6 +148,35 @@
             <TabItem Header="Регистрация преподавателя">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
+                    <TextBox x:Name="textBoxCreateNameTeacher" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
+                        materialDesign:HintAssist.Hint="Фамилия" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxCreateSurnameTeacher" HorizontalAlignment="Left" Height="60" Margin="62,127,0,0" TextWrapping="Wrap" Width="500"
+                        materialDesign:HintAssist.Hint="Имя" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxCreatePatronymicTeacher" HorizontalAlignment="Left" Height="60" Margin="62,192,0,0" TextWrapping="Wrap" Width="500"
+                        materialDesign:HintAssist.Hint="Отчество" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxCreatePersonnelNumberTeacher" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
+                        materialDesign:HintAssist.Hint="Логин(табельный номер)" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxCreatePasswordTeacher" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
+                        materialDesign:HintAssist.Hint="Пароль" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                    <ComboBox ItemsSource="{Binding sexes}" SelectedItem="{Binding teacher.Sex1}" x:Name="comboBoxCreateSexTeacher" HorizontalAlignment="Left" Margin="624,62,0,0" VerticalAlignment="Top" Width="106" Height="60"
+                        materialDesign:HintAssist.Hint="Пол" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock><Run Text="{Binding SexName}"/></TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Content="ЗАРЕГИСТРИРОВАТЬ" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="809,62,0,0" VerticalAlignment="Top" Width="254" Click="Button_Click_3" />
+                    <ComboBox x:Name="comboBoxCreateRoleTeacher" HorizontalAlignment="Left" Margin="62,387,0,0" VerticalAlignment="Top" Width="500" Height="60"
+                        materialDesign:HintAssist.Hint="Должность" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    </ComboBox>
                 </Grid>
             </TabItem>
         </TabControl>

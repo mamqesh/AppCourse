@@ -130,15 +130,121 @@ namespace AppTasks.Pages
             LoadUsersStudent();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
+        private void Button_Click_2(object sender, RoutedEventArgs e) //ЗАРЕГИСТРИРОВАТЬ СТУДЕНТА
+        {   
             string surname = textBoxCreateSurnameStudent.Text.Trim();
             string name = textBoxCreateNameStudent.Text.Trim();
             string patronymic = textBoxCreatePatronymicStudent.Text.Trim();
-            string group = textBoxCreateGroupStudent.Text.Trim();
             string login = textBoxCreateStudentTicketStudent.Text.Trim();
-            string password = textBoxCreatePasswordStudent.Text.Trim();
-            //group,sex
+            //string password = textBoxCreatePasswordStudent.Text.Trim();
+            //string sex = comboBoxSexStudent.SelectedItem.ToString();
+            //string speciality = comboBoxCreateSpecialityStudent.SelectedItem.ToString();
+            // group auto
+
+            void ClearTextBox()
+            {
+                surname = "";
+                name = "";
+                patronymic = "";
+                login = "";
+                //password = "";
+                //sex="";
+                //speciality="";
+                textBoxCreateSurnameStudent.Clear();
+                textBoxCreateNameStudent.Clear();
+                textBoxCreatePatronymicStudent.Clear();
+                textBoxCreateStudentTicketStudent.Clear();
+                //textBoxCreatePasswordStudent.Clear();
+                //comboBoxSexStudent.SelectedIndex = -1;
+                //comboBoxCreateSpecialityStudent.SelectedIndex = -1;
+            }
+            //+sex.Length+speciality.Length++password.Length
+            if (surname.Length+name.Length+patronymic.Length+login.Length==0)
+            {
+                MessageBox.Show("Вы ввели не все данные");
+            }
+            else { 
+            Database.Student student = new Database.Student();
+            student.StudentTicket = int.Parse(login);
+            student.Name = name;
+            student.Surname = surname;
+            student.Patronymic = patronymic;
+            //sex combobox
+            student.Sex = 1;
+            //group auto
+            student.Group = 3063;
+            student.Password = "group" + 3063;
+            connection.Student.Add(student);
+            int result = connection.SaveChanges();
+            if (result==1)
+            {
+                ClearTextBox();
+                MessageBox.Show("Студент успешно добавлен");
+            }
+            else
+            {
+                MessageBox.Show("Ошибка добавления студента");
+            }
+            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
+        {
+            string login = textBoxCreatePersonnelNumberTeacher.Text.Trim();
+            string name = textBoxCreateNameTeacher.Text.Trim();
+            string surname = textBoxCreateSurnameTeacher.Text.Trim();
+            string patronymic = textBoxCreatePatronymicTeacher.Text.Trim();
+            //string sex = comboBoxCreateSexTeacher.Text.Trim();
+            string password = textBoxCreatePasswordTeacher.Text.Trim();
+            //string role = comboBoxCreateRoleTeacher.Text.Trim();
+            void ClearTextBox()
+            {
+                surname = "";
+                name = "";
+                patronymic = "";
+                login = "";
+                //password = "";
+                //sex="";
+                //role="";
+                textBoxCreatePersonnelNumberTeacher.Clear();
+                textBoxCreateNameTeacher.Clear();
+                textBoxCreateSurnameTeacher.Clear();
+                textBoxCreatePatronymicTeacher.Clear();
+                //comboBoxCreateSexTeacher.Clear();
+                textBoxCreatePasswordTeacher.Clear();
+                //comboBoxCreateRoleTeacher.Clear();
+            }
+            //+sex.Length+role.Length
+            if (login.Length+name.Length+surname.Length+patronymic.Length+password.Length==0)
+            {
+                MessageBox.Show("Вы ввели не все данные");
+            }
+            else
+            {
+                Database.Teacher teacher = new Database.Teacher();
+                teacher.PersonnelNumber = int.Parse(login);
+                teacher.Name = name;
+                teacher.Surname = surname;
+                teacher.Patronymic = patronymic;
+                teacher.Sex = 1;
+                teacher.Password = password;
+                teacher.Role = "Преподаватель";
+                connection.Teacher.Add(teacher);
+                int result = connection.SaveChanges();
+                if (result == 1)
+                {
+                    ClearTextBox();
+                    MessageBox.Show("Преподаватель успешно добавлен");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления преподавателя");
+                }
+            }
+        }
+
+        private void TabItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
         }
     }

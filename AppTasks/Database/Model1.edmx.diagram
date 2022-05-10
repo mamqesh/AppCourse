@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="45b77a24da864bf7bdbbec361bf3679c" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="danil2Model.Admininstrator" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Group" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Lesson" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Option" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.OptionText" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Question" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Sex" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Speciality" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Student" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Subject" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Teacher" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Theme" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="danil2Model.FK__Group__Specialit__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Lesson__Group__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Student__Group__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Lesson__Subject__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Lesson__Teacher__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Option__Option__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Option__Question__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Option__Theme__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Question__Subjec__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Question__Teache__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Student__Sex__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Teacher__Sex__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Theme__Subject__59063A47" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

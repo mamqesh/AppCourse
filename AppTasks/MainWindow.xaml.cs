@@ -34,8 +34,7 @@ namespace AppTasks
             pageMainPage = new Pages.mainPage();
             pageStudentPage = new Pages.studentPage();
             pageAdministrationPage = new Pages.administrationPage();
-            //MainFrame.Navigate(pageMainPage);
-            MainFrame.Navigate(pageStudentPage);
+            MainFrame.Navigate(pageMainPage);
         }
     }
 }
