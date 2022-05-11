@@ -64,7 +64,6 @@ namespace AppTasks.Pages
             textBoxPatronymicTeacher.Clear();
             textBoxSurnameTeacher.Clear();
             comboBoxSexTeacher.SelectedIndex = -1;
-
             textBoxGroupStudent.Clear();
             textBoxLoginStudent.Clear();
             textBoxSurnameStudent.Clear();
@@ -95,6 +94,7 @@ namespace AppTasks.Pages
             textBoxLoginStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxPasswordStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxGroupStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            //Load speciality
             var sex = comboBoxSexStudent.GetBindingExpression(ComboBox.SelectedItemProperty);
             if (sex != null)
             {
@@ -245,7 +245,7 @@ namespace AppTasks.Pages
 
         private void TabItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            ClearTextBox();
         }
     }
 }

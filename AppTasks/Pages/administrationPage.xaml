@@ -62,7 +62,6 @@
             </TabItem>
             <TabItem Header="Изменить данные студентов">
                 <Grid Background="#FFE5E5E5">
-
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
                     <TextBox x:Name="textBoxSurnameStudent" Text="{Binding student.Surname}" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Фамилия" FontSize="20"

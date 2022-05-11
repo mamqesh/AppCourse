@@ -38,11 +38,11 @@ namespace AppTasks.Pages
         }
         private void Button_Click(object sender, RoutedEventArgs e) //ВХОД
         {
-            int tryExit = 0;
-            int login = int.Parse(textBoxLogin.Text.Trim());
-            string password = passwordBoxPassword.Password.Trim();
             try
             {
+                int tryExit = 0;
+                int login = int.Parse(textBoxLogin.Text.Trim());
+                string password = passwordBoxPassword.Password.Trim();
                 var student = connection.Student.Where(s => s.StudentTicket == login && s.Password == password).FirstOrDefault();
 
                 if (student != null)
@@ -64,6 +64,9 @@ namespace AppTasks.Pages
             }
             catch (Exception)
             {
+                int tryExit = 0;
+                string login = textBoxLogin.Text.Trim();
+                string password = passwordBoxPassword.Password.Trim();
                 var admin = connection.Admininstrator.Where(a => a.NameAdmininstrator == login.ToString() && a.Password == password).FirstOrDefault();
                 if (admin != null)
                 {

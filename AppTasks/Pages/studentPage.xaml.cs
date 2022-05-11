@@ -37,11 +37,23 @@ namespace AppTasks.Pages
             labelSurname.Content = s.Surname;
             labelName.Content = s.Name;
             labelPatronymic.Content = s.Patronymic;
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri("girl.png");
-            image.EndInit();
-            imageWindow.Source = image;
+            if (s.Sex==2)
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.UriSource = new Uri("girl.png");
+                image.EndInit();
+                imageWindow.Source = image;
+            }
+            else
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.UriSource = new Uri("man.png");
+                image.EndInit();
+                imageWindow.Source = image;
+            }
+            
         }
         
         void ClearElements()
