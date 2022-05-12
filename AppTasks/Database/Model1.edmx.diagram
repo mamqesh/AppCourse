@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="54425bd8654d4e21ba791686e43337bf" Name="Diagram1">
+      <Diagram DiagramId="f42af4b9ca0c490e97b6f4d70300d060" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="danil2Model.Admininstrator" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Group" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Lesson" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
@@ -15,21 +15,22 @@
         <EntityTypeShape EntityType="danil2Model.Speciality" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Student" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Subject" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Teacher" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Theme" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="danil2Model.FK__Group__Specialit__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Lesson__Group__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Student__Group__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Lesson__Subject__6754599E" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Lesson__Teacher__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Option__Option__619B8048" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Option__Question__628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Option__Theme__6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Question__Subjec__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Question__Teache__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Student__Sex__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Teacher__Sex__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="danil2Model.FK__Theme__Subject__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Group__Specialit__3A179ED3" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Lesson__Group__54CB950F" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Student__Group__3FD07829" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Lesson__Subject__55BFB948" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Lesson__Teacher__56B3DD81" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Option__Option__5006DFF2" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Option__Question__50FB042B" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Option__Theme__51EF2864" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Question__Subjec__4A4E069C" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Question__Teache__4B422AD5" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Student__Sex__3EDC53F0" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Teacher__Sex__42ACE4D4" ManuallyRouted="false" />
+        <AssociationConnector Association="danil2Model.FK__Theme__Subject__477199F1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

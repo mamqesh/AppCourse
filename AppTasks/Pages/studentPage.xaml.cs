@@ -41,7 +41,7 @@ namespace AppTasks.Pages
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.UriSource = new Uri("girl.png");
+                image.UriSource = new Uri("../girl.png", UriKind.Relative);
                 image.EndInit();
                 imageWindow.Source = image;
             }
@@ -49,7 +49,7 @@ namespace AppTasks.Pages
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.UriSource = new Uri("man.png");
+                image.UriSource = new Uri("../man.png", UriKind.Relative);
                 image.EndInit();
                 imageWindow.Source = image;
             }
@@ -62,14 +62,14 @@ namespace AppTasks.Pages
             labelSurname.Content = "";
             labelName.Content = "";
             labelPatronymic.Content = "";
-            listBoxLesson.SelectedIndex=-1;
+            listBoxSubject.SelectedIndex=-1;
         }
         void LoadSubject()
         {
             var subjects = connection.Subject.ToList();
             foreach (var _subject in subjects)
             {
-                listBoxLesson.Items.Add(_subject);
+                listBoxSubject.Items.Add(_subject);
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -78,9 +78,16 @@ namespace AppTasks.Pages
             NavigationService.GoBack();
         }
 
-        private void listBoxLesson_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void listBoxSubject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            listBoxTheme.SelectedIndex = -1;
+            listBoxTheme.Items.Clear();
+            var subject = listBoxSubject.SelectedItem as Database.Subject;
+            if (subject!=null)
+            {
+                subject.Theme.ToList();
+                listBoxTheme.Items.Add(subject.Theme);
+            }
         }
     }
 }

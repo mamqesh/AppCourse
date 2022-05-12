@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 using AppTasks.Database;
+
 
 namespace AppTasks.Pages
 {
@@ -26,35 +28,14 @@ namespace AppTasks.Pages
         public Database.Student student { get; set; }
         public List <Database.Student> students { get; set; }
         public List <Database.Sex> sexes { get; set; }
-
-
-
         danil2Entities2 connection = new danil2Entities2();
         public administrationPage()
         {
             InitializeComponent();
-            LoadTeacher();
             LoadSex();
-            LoadStudent();
             teachers = connection.Teacher.ToList();
             students = connection.Student.ToList();
             DataContext = this;
-        }
-        void LoadTeacher()
-        {
-            var teachers = connection.Teacher.ToList();
-            foreach (var teacher in teachers)
-            {
-                listBoxTeacher.Items.Add(teacher);
-            }
-        }
-        void LoadStudent()
-        {
-            var students = connection.Student.ToList();
-            foreach (var student in students)
-            {
-                listBoxStudent.Items.Add(student);
-            }
         }
         void ClearTextBox()
         {
@@ -80,11 +61,8 @@ namespace AppTasks.Pages
             textBoxPatronymicTeacher.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxLoginTeacher.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxPasswordTeacher.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            var sex = comboBoxSexTeacher.GetBindingExpression(ComboBox.SelectedItemProperty);
-            if (sex != null)
-            {
-                sex.UpdateTarget();
-            }
+            comboBoxSexTeacher.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
+            listBoxTeacher.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
         }
         void LoadUsersStudent()
         {
@@ -95,17 +73,14 @@ namespace AppTasks.Pages
             textBoxPasswordStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxGroupStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             //Load speciality
-            var sex = comboBoxSexStudent.GetBindingExpression(ComboBox.SelectedItemProperty);
-            if (sex != null)
-            {
-                sex.UpdateTarget();
-            }
+            comboBoxSexStudent.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
+            listBoxStudent.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
         }
         void LoadSex()
         {
             sexes = connection.Sex.ToList();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)//ПРИМЕНИТЬ РЕДАКТИРОВАНИЕ
         {
             int result = connection.SaveChanges();
             if (result ==1)
@@ -118,18 +93,16 @@ namespace AppTasks.Pages
             teacher = listBoxTeacher.SelectedItem as Database.Teacher;
             LoadUsersTeacher();
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)//КНОПКА ВЫХОД
         {
             ClearTextBox();
             NavigationService.GoBack();
         }
-
         private void listBoxStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)//КЛИК ПО СТУДЕНТУ
         {
             student = listBoxStudent.SelectedItem as Database.Student;
             LoadUsersStudent();
         }
-
         private void Button_Click_2(object sender, RoutedEventArgs e) //ЗАРЕГИСТРИРОВАТЬ СТУДЕНТА
         {   
             string surname = textBoxCreateSurnameStudent.Text.Trim();
@@ -140,7 +113,6 @@ namespace AppTasks.Pages
             //string sex = comboBoxSexStudent.SelectedItem.ToString();
             //string speciality = comboBoxCreateSpecialityStudent.SelectedItem.ToString();
             // group auto
-
             void ClearTextBox()
             {
                 surname = "";
@@ -187,7 +159,6 @@ namespace AppTasks.Pages
             }
             }
         }
-
         private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
         {
             string login = textBoxCreatePersonnelNumberTeacher.Text.Trim();
@@ -242,10 +213,29 @@ namespace AppTasks.Pages
                 }
             }
         }
-
         private void TabItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ClearTextBox();
-        }
+        }//ОЧИСТКА ПО КЛИКУ
+        private void textBoxSearchTeacher_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                var text = textBox.Text.Trim();
+               teachers = connection.Teacher.Where(t => DbFunctions.Like(t.Name, "%" + text + "%") || DbFunctions.Like(t.Surname, "%" + text + "%") || DbFunctions.Like(t.Patronymic, "%" + text + "%")).ToList();
+                LoadUsersTeacher();
+            }
+        } //ПОИСК УЧИТЕЛЕЙ
+        private void textBoxSearchStudent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                var text = textBox.Text.Trim();
+                students=connection.Student.Where(t => DbFunctions.Like(t.Name, "%" + text + "%") || DbFunctions.Like(t.Surname, "%" + text + "%") || DbFunctions.Like(t.Patronymic, "%" + text + "%")).ToList();
+                LoadUsersStudent();
+            }
+        } //ПОИСК СТУДЕНТОВ
     }
 }

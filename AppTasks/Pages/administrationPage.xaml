@@ -13,7 +13,7 @@
         <TabControl HorizontalAlignment="Center" Height="1080" VerticalAlignment="Top" Width="1920" 
                     Style="{StaticResource MaterialDesignFilledTabControl}" >
             <TabItem Header="Изменить данные преподавателя" >
-                <Grid Background="#FFE5E5E5">
+                <Grid>
                     <TextBox Name="textBoxSurnameTeacher" Text="{Binding teacher.Surname}" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
                              materialDesign:HintAssist.Hint="Фамилия" FontSize="20"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
@@ -29,7 +29,7 @@
                     <TextBox Name="textBoxPasswordTeacher" Text="{Binding teacher.Password}" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <ListBox Name="listBoxTeacher" HorizontalAlignment="Left" Height="903" Margin="899,127,0,0" VerticalAlignment="Top" Width="463"
+                    <ListBox ItemsSource="{Binding teachers}" Name="listBoxTeacher" HorizontalAlignment="Left" Height="903" Margin="899,127,0,0" VerticalAlignment="Top" Width="463"
                              FontSize="25" SelectionChanged="listBoxTeacher_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -57,11 +57,11 @@
                     </ComboBox>
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
                     <TextBox x:Name="textBoxSearchTeacher" HorizontalAlignment="Left" Height="37" Margin="899,62,0,0" TextWrapping="Wrap" Width="463"
-                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top"/>
+                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top" TextChanged="textBoxSearchTeacher_TextChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Изменить данные студентов">
-                <Grid Background="#FFE5E5E5">
+                <Grid>
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
                     <TextBox x:Name="textBoxSurnameStudent" Text="{Binding student.Surname}" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Фамилия" FontSize="20"
@@ -91,10 +91,10 @@
                     <TextBox x:Name="textBoxGroupStudent" Text="{Binding student.Group}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Группа" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBoxSpecialityStudent" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
+                    <TextBox x:Name="textBoxSpecialityStudent" Text="" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Специальность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <ListBox x:Name="listBoxStudent" HorizontalAlignment="Left" Height="838" Margin="899,127,0,0" VerticalAlignment="Top" Width="500"
+                    <ListBox ItemsSource="{Binding students}" x:Name="listBoxStudent" HorizontalAlignment="Left" Height="838" Margin="899,127,0,0" VerticalAlignment="Top" Width="500"
                         FontSize="25" SelectionChanged="listBoxStudent_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -103,11 +103,11 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <TextBox x:Name="textBoxSearchStudent" HorizontalAlignment="Left" Height="37" Margin="899,62,0,0" TextWrapping="Wrap" Width="500"
-                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top"/>
+                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top" TextChanged="textBoxSearchStudent_TextChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Регистрация студента">
-                <Grid Background="#FFE5E5E5">
+                <Grid>
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
                     <TextBox x:Name="textBoxCreateSurnameStudent" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Фамилия" FontSize="20"
@@ -130,7 +130,7 @@
                     <TextBox x:Name="textBoxCreateGroupStudent" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Группа" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    
+
                     <TextBox x:Name="textBoxCreateStudentTicketStudent" HorizontalAlignment="Left" Height="60" Margin="62,387,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Логин(студенческий билет)" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
@@ -142,10 +142,18 @@
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <Button Content="ЗАРЕГИСТРИРОВАТЬ" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="809,62,0,0" VerticalAlignment="Top" Width="254" Click="Button_Click_2" />
+                    <TabControl HorizontalAlignment="Left" Height="433" Margin="1122,100,0,0" VerticalAlignment="Top" Width="595" Style="{StaticResource MaterialDesignFilledTabControl}">
+                        <TabItem Header="Создать специальность">
+                            <Grid>
+
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Регистрация преподавателя">
-                <Grid Background="#FFE5E5E5">
+                <Grid>
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
                     <TextBox x:Name="textBoxCreateNameTeacher" HorizontalAlignment="Left" Height="60" Margin="62,62,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Фамилия" FontSize="20"
@@ -176,9 +184,15 @@
                         materialDesign:HintAssist.Hint="Должность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
+                    <TabControl HorizontalAlignment="Left" Height="245" Margin="1233,187,0,0" VerticalAlignment="Top" Width="364" Style="{StaticResource MaterialDesignFilledTabControl}">
+                        <TabItem Header="Создать должность">
+                            <Grid>
+                                
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Page>

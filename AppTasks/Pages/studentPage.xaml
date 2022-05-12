@@ -32,8 +32,8 @@
         <Label Name="labelName" Content="Name" FontSize="30" HorizontalAlignment="Right" Margin="0,6,219,0" VerticalAlignment="Top" Height="56" Width="384" RenderTransformOrigin="0.52,0.714" Grid.Row="3" Grid.ColumnSpan="2"/>
         <Label Name="labelSurname" Content="Surname" FontSize="30" HorizontalAlignment="Right" Margin="0,110,219,0" VerticalAlignment="Top" Grid.Row="2" Height="56" Width="384" Grid.ColumnSpan="2"/>
         <Label Name="labelPatronymic" Content="Patronymic" FontSize="30" HorizontalAlignment="Right" Margin="0,5,219,0" VerticalAlignment="Top" Grid.Row="4" Height="56" Width="384" Grid.ColumnSpan="2"/>
-        <ListBox Name="listBoxLesson" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Height="836" Margin="106,0,0,86" VerticalAlignment="Bottom" 
-                 Width="524" Grid.RowSpan="8" Grid.ColumnSpan="2" SelectionChanged="listBoxLesson_SelectionChanged" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}">
+        <ListBox Name="listBoxSubject" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Height="836" Margin="106,0,0,86" VerticalAlignment="Bottom" 
+                 Width="524" Grid.RowSpan="8" Grid.ColumnSpan="2" SelectionChanged="listBoxSubject_SelectionChanged" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -44,5 +44,13 @@
         </ListBox>
         <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1"/>
         <Image Name="imageWindow" Margin="0,0,297,145" Grid.RowSpan="3" Source="/AppTasks;component/man.png" Stretch="Fill" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom"/>
+        <ListBox x:Name="listBoxTheme" Grid.Column="3" FontSize="25" HorizontalAlignment="Left" Height="836" Margin="38,0,0,86" VerticalAlignment="Bottom" 
+            Width="524" Grid.RowSpan="8" Grid.ColumnSpan="2" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock><Run Text="{Binding ThemeName}"/></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>
