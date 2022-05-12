@@ -211,7 +211,6 @@
     <Resource Include="girl.png" />
     <Resource Include="man.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
