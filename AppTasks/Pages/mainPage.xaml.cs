@@ -48,8 +48,8 @@ namespace AppTasks.Pages
                 if (student != null)
                 {
                     ClearElements();
-                    NavigationService.Navigate(MainWindow.pageStudentPage);
                     MainWindow.pageStudentPage.SetStudent(student);
+                    NavigationService.Navigate(MainWindow.pageStudentPage);
                     tryExit++;
                     return;
                 }

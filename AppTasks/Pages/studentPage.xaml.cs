@@ -41,7 +41,7 @@ namespace AppTasks.Pages
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.UriSource = new Uri("girl.png");
+                image.UriSource = new Uri("../girl.png", UriKind.Relative);
                 image.EndInit();
                 imageWindow.Source = image;
             }
@@ -49,7 +49,7 @@ namespace AppTasks.Pages
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
-                image.UriSource = new Uri("man.png");
+                image.UriSource = new Uri("../man.png", UriKind.Relative);
                 image.EndInit();
                 imageWindow.Source = image;
             }
@@ -80,7 +80,12 @@ namespace AppTasks.Pages
 
         private void listBoxLesson_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            var subject = listBoxLesson.SelectedItem as Database.Subject;
+            if (subject!=null)
+            {
+                subject.Theme.ToList();
+                listBoxSubject.Items.Add(subject);
+            }
         }
     }
 }

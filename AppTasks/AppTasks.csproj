@@ -125,6 +125,9 @@
     <Compile Include="Database\Subject.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\sysdiagrams.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Teacher.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -211,7 +214,6 @@
     <Resource Include="girl.png" />
     <Resource Include="man.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

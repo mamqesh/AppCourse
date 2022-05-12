@@ -29,7 +29,7 @@
                     <TextBox Name="textBoxPasswordTeacher" Text="{Binding teacher.Password}" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <ListBox Name="listBoxTeacher" HorizontalAlignment="Left" Height="903" Margin="899,127,0,0" VerticalAlignment="Top" Width="463"
+                    <ListBox ItemsSource="{Binding teachers}" Name="listBoxTeacher" HorizontalAlignment="Left" Height="903" Margin="899,127,0,0" VerticalAlignment="Top" Width="463"
                              FontSize="25" SelectionChanged="listBoxTeacher_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -57,7 +57,7 @@
                     </ComboBox>
                     <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="100,900,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_1"/>
                     <TextBox x:Name="textBoxSearchTeacher" HorizontalAlignment="Left" Height="37" Margin="899,62,0,0" TextWrapping="Wrap" Width="463"
-                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top"/>
+                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top" TextChanged="textBoxSearchTeacher_TextChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Изменить данные студентов">
@@ -94,7 +94,7 @@
                     <TextBox x:Name="textBoxSpecialityStudent" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Специальность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <ListBox x:Name="listBoxStudent" HorizontalAlignment="Left" Height="838" Margin="899,127,0,0" VerticalAlignment="Top" Width="500"
+                    <ListBox ItemsSource="{Binding students}" x:Name="listBoxStudent" HorizontalAlignment="Left" Height="838" Margin="899,127,0,0" VerticalAlignment="Top" Width="500"
                         FontSize="25" SelectionChanged="listBoxStudent_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -103,7 +103,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <TextBox x:Name="textBoxSearchStudent" HorizontalAlignment="Left" Height="37" Margin="899,62,0,0" TextWrapping="Wrap" Width="500"
-                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top"/>
+                        materialDesign:HintAssist.Hint="Поиск" FontSize="20" VerticalAlignment="Top" TextChanged="textBoxSearchStudent_TextChanged"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Регистрация студента">

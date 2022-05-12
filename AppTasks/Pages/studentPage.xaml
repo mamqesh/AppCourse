@@ -44,5 +44,13 @@
         </ListBox>
         <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1"/>
         <Image Name="imageWindow" Margin="0,0,297,145" Grid.RowSpan="3" Source="/AppTasks;component/man.png" Stretch="Fill" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom"/>
+        <ListBox x:Name="listBoxSubject" Grid.Column="3" FontSize="25" HorizontalAlignment="Left" Height="836" Margin="38,0,0,86" VerticalAlignment="Bottom" 
+            Width="524" Grid.RowSpan="8" Grid.ColumnSpan="2" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock><Run Text="{Binding ThemeName}"/></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

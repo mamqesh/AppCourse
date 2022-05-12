@@ -35,6 +35,7 @@ namespace AppTasks.Database
         public virtual DbSet<Speciality> Speciality { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Subject> Subject { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
         public virtual DbSet<Theme> Theme { get; set; }
     }
