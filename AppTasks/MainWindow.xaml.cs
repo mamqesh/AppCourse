@@ -24,6 +24,7 @@ namespace AppTasks
         public static Pages.studentPage pageStudentPage;
         public static Pages.teacherPage pageTeacherPage;
         public static Pages.administrationPage pageAdministrationPage;
+        public static Pages.themePage pageThemePage;
         public static MainWindow Instance;
         public MainWindow()
         {
@@ -34,6 +35,7 @@ namespace AppTasks
             pageMainPage = new Pages.mainPage();
             pageStudentPage = new Pages.studentPage();
             pageAdministrationPage = new Pages.administrationPage();
+            pageThemePage = new Pages.themePage();
             MainFrame.Navigate(pageMainPage);
         }
     }

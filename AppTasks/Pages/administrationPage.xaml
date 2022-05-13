@@ -91,7 +91,7 @@
                     <TextBox x:Name="textBoxGroupStudent" Text="{Binding student.Group}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Группа" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBoxSpecialityStudent" Text="" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
+                    <TextBox IsReadOnly="True" x:Name="textBoxSpecialityStudent" Text="{Binding student.Group1.Speciality1.SpecialityName}" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Специальность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <ListBox ItemsSource="{Binding students}" x:Name="listBoxStudent" HorizontalAlignment="Left" Height="838" Margin="899,127,0,0" VerticalAlignment="Top" Width="500"
@@ -142,8 +142,13 @@
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <Button Content="ЗАРЕГИСТРИРОВАТЬ" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="809,62,0,0" VerticalAlignment="Top" Width="254" Click="Button_Click_2" />
-                    <TabControl HorizontalAlignment="Left" Height="433" Margin="1122,100,0,0" VerticalAlignment="Top" Width="595" Style="{StaticResource MaterialDesignFilledTabControl}">
+                    <TabControl HorizontalAlignment="Left" Height="800" Margin="1122,100,0,0" VerticalAlignment="Top" Width="700" Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem Header="Создать специальность">
+                            <Grid>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Создать что-то">
                             <Grid>
 
                             </Grid>
@@ -184,10 +189,20 @@
                         materialDesign:HintAssist.Hint="Должность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
-                    <TabControl HorizontalAlignment="Left" Height="245" Margin="1233,187,0,0" VerticalAlignment="Top" Width="364" Style="{StaticResource MaterialDesignFilledTabControl}">
+                    <TabControl HorizontalAlignment="Left" Height="793" Margin="809,167,0,0" VerticalAlignment="Top" Width="921" Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem Header="Создать должность">
                             <Grid>
-                                
+                                <Button Content="Создать должность" HorizontalAlignment="Center" Margin="81,604,554,76" VerticalAlignment="Center" Width="286" Height="65" FontSize="20" Click="Button_Click_4"/>
+                                <TextBox Name="textBoxCreateRole" HorizontalAlignment="Center" Height="59" Margin="81,92,234,594" TextWrapping="Wrap" VerticalAlignment="Center" Width="606" 
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Наименование должности" FontSize="20"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Создать предмет">
+                            <Grid>
+                                <TextBox Name="textBoxCreateSubject" HorizontalAlignment="Center" Height="59" Margin="81,92,234,594" TextWrapping="Wrap" VerticalAlignment="Center" Width="606" 
+                                    Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Наименование предмета" FontSize="20"/>
+                                <Button Content="Создать должность" HorizontalAlignment="Center" Margin="81,604,554,76" VerticalAlignment="Center" Width="286" Height="65" FontSize="20" Click="Button_Click_5"/>
+
                             </Grid>
                         </TabItem>
                     </TabControl>

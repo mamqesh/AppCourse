@@ -37,7 +37,7 @@ namespace AppTasks.Pages
             labelSurname.Content = s.Surname;
             labelName.Content = s.Name;
             labelPatronymic.Content = s.Patronymic;
-            if (s.Sex==2)
+            if (s.Sex == 2)
             {
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
@@ -53,16 +53,16 @@ namespace AppTasks.Pages
                 image.EndInit();
                 imageWindow.Source = image;
             }
-            
+
         }
-        
+
         void ClearElements()
         {
             labelRole.Content = "";
             labelSurname.Content = "";
             labelName.Content = "";
             labelPatronymic.Content = "";
-            listBoxSubject.SelectedIndex=-1;
+            listBoxSubject.SelectedIndex = -1;
         }
         void LoadSubject()
         {
@@ -83,11 +83,23 @@ namespace AppTasks.Pages
             listBoxTheme.SelectedIndex = -1;
             listBoxTheme.Items.Clear();
             var subject = listBoxSubject.SelectedItem as Database.Subject;
-            if (subject!=null)
+            if (subject != null)
             {
-                subject.Theme.ToList();
-                listBoxTheme.Items.Add(subject.Theme);
+                if (subject.Theme.Count != 0)
+                {
+                   var theme = subject.Theme.ToList();
+                    foreach (var themes in theme)
+                    {
+                        listBoxTheme.Items.Add(themes);
+                    }
+                }
             }
+        }
+
+        private void listBoxTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            NavigationService.Navigate(MainWindow.pageThemePage);
+            MainWindow.pageThemePage.SetTheme(((Theme)listBoxTheme.SelectedItem).ThemeID);
         }
     }
 }

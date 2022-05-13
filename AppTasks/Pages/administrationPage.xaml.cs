@@ -28,6 +28,7 @@ namespace AppTasks.Pages
         public Database.Student student { get; set; }
         public List <Database.Student> students { get; set; }
         public List <Database.Sex> sexes { get; set; }
+        public List <Database.Group> groups { get; set; }
         danil2Entities2 connection = new danil2Entities2();
         public administrationPage()
         {
@@ -72,7 +73,7 @@ namespace AppTasks.Pages
             textBoxLoginStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxPasswordStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             textBoxGroupStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            //Load speciality
+            textBoxSpecialityStudent.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
             comboBoxSexStudent.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
             listBoxStudent.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
         }
@@ -237,5 +238,14 @@ namespace AppTasks.Pages
                 LoadUsersStudent();
             }
         } //ПОИСК СТУДЕНТОВ
+        private void Button_Click_4(object sender, RoutedEventArgs e)//СОЗДАТЬ ДОЛЖНОСТЬ
+        {
+
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)//СОЗДАТЬ ПРЕДМЕТ
+        {
+
+        }
     }
 }

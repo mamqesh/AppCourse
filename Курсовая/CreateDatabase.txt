@@ -29,6 +29,11 @@ CREATE TABLE [Student] (
 	Foreign key ([Group]) references [Group](IDGroup)
 )
 GO
+CREATE TABLE [Role](
+	RoleID INT PRIMARY KEY NOT NULL,
+	RoleName varchar(100) not null
+)
+
 CREATE TABLE [Teacher] (
 	PersonnelNumber integer primary key NOT NULL,
 	[Name] nvarchar(50) NOT NULL,
@@ -36,8 +41,9 @@ CREATE TABLE [Teacher] (
 	Patronymic nvarchar(50) NOT NULL,
 	Sex int NOT NULL,
 	[Password] nvarchar(100) NOT NULL,
-	[Role] nvarchar(50) NOT NULL,
-	FOREIGN KEY (Sex) references Sex(SexID)
+	[Role] int NOT NULL,
+	FOREIGN KEY (Sex) references Sex(SexID),
+	FOREIGN KEY ([Role]) references [Role](RoleID)
 )
 GO
 CREATE TABLE [Subject] (
@@ -97,6 +103,14 @@ CREATE TABLE [Admininstrator](
 )
 GO
 
+INSERT INTO [Admininstrator] (NameAdmininstrator,[Password]) VALUES
+('admin', 'admin')
+GO
+
+INSERT INTO [Role](RoleID,RoleName) VALUES
+(1, 'Преподаватель'),
+(2, 'Директор')
+
 INSERT INTO Sex (SexID,SexName) VALUES
 (1, 'муж'),
 (2, 'жен')
@@ -131,11 +145,11 @@ INSERT INTO Student(StudentTicket, [Name], Surname, Patronymic, Sex, [Group], [P
 GO
 
 INSERT INTO Teacher(PersonnelNumber, [Name], Surname, Patronymic, [Password], Sex, [Role]) VALUES
-('1163', N'Евгений', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
-('1181', N'Юрий', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
-('1249', N'Владимир', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
-('1282', N'Данил', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель'),
-('1422', N'Данзан', N'Майоров', N'Игоревич','qwerty123', '1', N'Преподаватель')
+('1163', N'Евгений', N'Майоров', N'Игоревич','qwerty123', '1', '1'),
+('1181', N'Юрий', N'Майоров', N'Игоревич','qwerty123', '1', '1'),
+('1249', N'Владимир', N'Майоров', N'Игоревич','qwerty123', '1', '2'),
+('1282', N'Данил', N'Майоров', N'Игоревич','qwerty123', '1', '1'),
+('1422', N'Данзан', N'Майоров', N'Игоревич','qwerty123', '1', '1')
 GO
 
 INSERT INTO [Subject](SubjectID,SubjectName) VALUES 
