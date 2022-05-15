@@ -25,7 +25,7 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <TextBox Name="textBoxLoginTeacher" Text="{Binding teacher.PersonnelNumber}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Логин" FontSize="20"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" IsReadOnly="True"/>
                     <TextBox Name="textBoxPasswordTeacher" Text="{Binding teacher.Password}" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
@@ -72,8 +72,8 @@
                     <TextBox x:Name="textBoxPatronymicStudent" Text="{Binding student.Patronymic}" HorizontalAlignment="Left" Height="60" Margin="62,192,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Отчество" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBoxLoginStudent" Text="{Binding student.StudentTicket}" HorizontalAlignment="Left" Height="60" Margin="62,387,0,0" TextWrapping="Wrap" Width="500"
-                        materialDesign:HintAssist.Hint="Логин" FontSize="20"
+                    <TextBox IsReadOnly="True" x:Name="textBoxLoginStudent" Text="{Binding student.StudentTicket}" HorizontalAlignment="Left" Height="60" Margin="62,387,0,0" TextWrapping="Wrap" Width="500"
+                        materialDesign:HintAssist.Hint="Логин" FontSize="20" 
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <TextBox x:Name="textBoxPasswordStudent" Text="{Binding student.Password}" HorizontalAlignment="Left" Height="60" Margin="62,452,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
@@ -145,6 +145,9 @@
                     <TabControl HorizontalAlignment="Left" Height="800" Margin="1122,100,0,0" VerticalAlignment="Top" Width="700" Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem Header="Создать специальность">
                             <Grid>
+                                <TextBox x:Name="textBoxCreateSpeciality" HorizontalAlignment="Center" Height="59" Margin="34,50,60,643" TextWrapping="Wrap" VerticalAlignment="Center" Width="606" 
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Наименование специальности" FontSize="20"/>
+                                <Button Content="Создать специальность" HorizontalAlignment="Center" Margin="81,604,333,83" VerticalAlignment="Center" Width="286" Height="65" FontSize="20" Click="Button_Click_6"/>
 
                             </Grid>
                         </TabItem>
@@ -201,7 +204,7 @@
                             <Grid>
                                 <TextBox Name="textBoxCreateSubject" HorizontalAlignment="Center" Height="59" Margin="81,92,234,594" TextWrapping="Wrap" VerticalAlignment="Center" Width="606" 
                                     Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Наименование предмета" FontSize="20"/>
-                                <Button Content="Создать должность" HorizontalAlignment="Center" Margin="81,604,554,76" VerticalAlignment="Center" Width="286" Height="65" FontSize="20" Click="Button_Click_5"/>
+                                <Button Content="Создать предмет" HorizontalAlignment="Center" Margin="81,604,554,76" VerticalAlignment="Center" Width="286" Height="65" FontSize="20" Click="Button_Click_5"/>
 
                             </Grid>
                         </TabItem>
