@@ -29,11 +29,15 @@ namespace AppTasks.Pages
         public List<Database.Student> students { get; set; }
         public List<Database.Sex> sexes { get; set; }
         public List<Database.Group> groups { get; set; }
+        public List<Database.Speciality> specialities { get;set; }
+        public List<Database.Role> roles { get; set; }
         danil2Entities2 connection = new danil2Entities2();
         public administrationPage()
         {
             InitializeComponent();
             LoadSex();
+            LoadSpecialityStudent();
+            LoadRoleTeacher();
             teachers = connection.Teacher.ToList();
             students = connection.Student.ToList();
             DataContext = this;
@@ -81,6 +85,14 @@ namespace AppTasks.Pages
         {
             sexes = connection.Sex.ToList();
         }
+        void LoadSpecialityStudent()
+        {
+            specialities = connection.Speciality.ToList();
+        }
+        void LoadRoleTeacher()
+        {
+            roles = connection.Role.ToList();
+        }
         private void Button_Click(object sender, RoutedEventArgs e)//ПРИМЕНИТЬ РЕДАКТИРОВАНИЕ
         {
             int result = connection.SaveChanges();
@@ -110,29 +122,27 @@ namespace AppTasks.Pages
             string name = textBoxCreateNameStudent.Text.Trim();
             string patronymic = textBoxCreatePatronymicStudent.Text.Trim();
             string login = textBoxCreateStudentTicketStudent.Text.Trim();
-            //string password = textBoxCreatePasswordStudent.Text.Trim();
-            //string sex = comboBoxSexStudent.SelectedItem.ToString();
-            //string speciality = comboBoxCreateSpecialityStudent.SelectedItem.ToString();
-            // group auto
+            string password = textBoxCreatePasswordStudent.Text.Trim();
+            string sex = comboBoxSexStudent.SelectedItem.ToString();
+            string speciality = comboBoxCreateSpecialityStudent.SelectedItem.ToString();
             void ClearTextBox()
             {
                 surname = "";
                 name = "";
                 patronymic = "";
                 login = "";
-                //password = "";
-                //sex="";
-                //speciality="";
+                password = "";
+                sex = "";
+                speciality = "";
                 textBoxCreateSurnameStudent.Clear();
                 textBoxCreateNameStudent.Clear();
                 textBoxCreatePatronymicStudent.Clear();
                 textBoxCreateStudentTicketStudent.Clear();
-                //textBoxCreatePasswordStudent.Clear();
-                //comboBoxSexStudent.SelectedIndex = -1;
-                //comboBoxCreateSpecialityStudent.SelectedIndex = -1;
+                textBoxCreatePasswordStudent.Clear();
+                comboBoxSexStudent.SelectedIndex = -1;
+                comboBoxCreateSpecialityStudent.SelectedIndex = -1;
             }
-            //+sex.Length+speciality.Length++password.Length
-            if (surname.Length + name.Length + patronymic.Length + login.Length == 0)
+            if (surname.Length == 0 || name.Length == 0 || patronymic.Length == 0 || login.Length == 0 || sex.Length == 0 || speciality.Length == 0 || password.Length == 0)
             {
                 MessageBox.Show("Вы ввели не все данные");
             }
@@ -143,10 +153,12 @@ namespace AppTasks.Pages
                 student.Name = name;
                 student.Surname = surname;
                 student.Patronymic = patronymic;
+
                 //sex combobox
                 student.Sex = 1;
                 //group auto
                 student.Group = 3063;
+
                 student.Password = "group" + 3063;
                 connection.Student.Add(student);
                 int result = connection.SaveChanges();
@@ -167,28 +179,27 @@ namespace AppTasks.Pages
             string name = textBoxCreateNameTeacher.Text.Trim();
             string surname = textBoxCreateSurnameTeacher.Text.Trim();
             string patronymic = textBoxCreatePatronymicTeacher.Text.Trim();
-            //string sex = comboBoxCreateSexTeacher.Text.Trim();
+            string sex = comboBoxCreateSexTeacher.Text.Trim();
             string password = textBoxCreatePasswordTeacher.Text.Trim();
-            //string role = comboBoxCreateRoleTeacher.Text.Trim();
+            string role = comboBoxCreateRoleTeacher.Text.Trim();
             void ClearTextBox()
             {
                 surname = "";
                 name = "";
                 patronymic = "";
                 login = "";
-                //password = "";
-                //sex="";
-                //role="";
+                password = "";
+                sex = "";
+                role = "";
                 textBoxCreatePersonnelNumberTeacher.Clear();
                 textBoxCreateNameTeacher.Clear();
                 textBoxCreateSurnameTeacher.Clear();
                 textBoxCreatePatronymicTeacher.Clear();
-                //comboBoxCreateSexTeacher.Clear();
+                comboBoxCreateSexTeacher.SelectedIndex = -1;
                 textBoxCreatePasswordTeacher.Clear();
-                //comboBoxCreateRoleTeacher.Clear();
+                comboBoxCreateRoleTeacher.SelectedIndex = -1;
             }
-            //+sex.Length+role.Length
-            if (login.Length + name.Length + surname.Length + patronymic.Length + password.Length == 0)
+            if (login.Length == 0 || name.Length == 0 || surname.Length == 0 || patronymic.Length == 0 || password.Length == 0 || sex.Length == 0 || role.Length == 0)
             {
                 MessageBox.Show("Вы ввели не все данные");
             }
@@ -201,7 +212,10 @@ namespace AppTasks.Pages
                 teacher.Patronymic = patronymic;
                 teacher.Sex = 1;
                 teacher.Password = password;
-                teacher.Role = "Преподаватель";
+
+                //role auto
+                teacher.Role = 1;
+
                 connection.Teacher.Add(teacher);
                 int result = connection.SaveChanges();
                 if (result == 1)
@@ -247,24 +261,24 @@ namespace AppTasks.Pages
                 textBoxCreateRole.Clear();
                 roleTextBox = "";
             }
-            //Database.Role role = new Role();
-            //int roleID = connection.Role.ToList().Count()+1;
-            //role.RoleID = roleID;
-            //role.RoleName=roleTextBox;
-            //connection.Role.Add(role);
-            //int result = connection.SaveChanges();
-            //if (result > 1)
-            //{
-            //    ClearItem();
-            //    MessageBox.Show("Специальность добавлена");
-            //}
-            //else
-            //{
-            //    ClearItem();
-            //    MessageBox.Show("Ошибка добавления");
-            //}
-        }
 
+            Database.Role role = new Role();
+            int roleID = connection.Role.ToList().Count() + 1;
+            role.RoleID = roleID;
+            role.RoleName = roleTextBox;
+            connection.Role.Add(role);
+            int result = connection.SaveChanges();
+            if (result > 1)
+            {
+                ClearItem();
+                MessageBox.Show("Специальность добавлена");
+            }
+            else
+            {
+                ClearItem();
+                MessageBox.Show("Ошибка добавления");
+            }
+        }
         private void Button_Click_5(object sender, RoutedEventArgs e)//СОЗДАТЬ ПРЕДМЕТ
         {
             string subjectTextBox = textBoxCreateSubject.Text.Trim();
@@ -279,7 +293,7 @@ namespace AppTasks.Pages
             subject.SubjectName = subjectTextBox;
             connection.Subject.Add(subject);
             int result = connection.SaveChanges();
-            if (result>1)
+            if (result > 1)
             {
                 ClearItem();
                 MessageBox.Show("Специальность добавлена");
@@ -290,7 +304,6 @@ namespace AppTasks.Pages
                 MessageBox.Show("Ошибка добавления");
             }
         }
-
         private void Button_Click_6(object sender, RoutedEventArgs e) //СОЗДАТЬ СПЕЦИАЛЬНОСТЬ
         {
             string specialityTextBox = textBoxCreateRole.Text.Trim();

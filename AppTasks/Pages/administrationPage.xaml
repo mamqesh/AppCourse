@@ -23,7 +23,7 @@
                     <TextBox Name="textBoxPatronymicTeacher" Text="{Binding teacher.Patronymic}" HorizontalAlignment="Left" Height="60" Margin="62,192,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Отчество" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <TextBox Name="textBoxLoginTeacher" Text="{Binding teacher.PersonnelNumber}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
+                    <TextBox  Name="textBoxLoginTeacher" Text="{Binding teacher.PersonnelNumber}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Логин" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" IsReadOnly="True"/>
                     <TextBox Name="textBoxPasswordTeacher" Text="{Binding teacher.Password}" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
@@ -88,7 +88,7 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <TextBox x:Name="textBoxGroupStudent" Text="{Binding student.Group}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
+                    <TextBox IsReadOnly="True" x:Name="textBoxGroupStudent" Text="{Binding student.Group}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Группа" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <TextBox IsReadOnly="True" x:Name="textBoxSpecialityStudent" Text="{Binding student.Group1.Speciality1.SpecialityName}" HorizontalAlignment="Left" Height="60" Margin="62,322,0,0" TextWrapping="Wrap" Width="500"
@@ -134,9 +134,16 @@
                     <TextBox x:Name="textBoxCreateStudentTicketStudent" HorizontalAlignment="Left" Height="60" Margin="62,387,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Логин(студенческий билет)" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="comboBoxCreateSpecialityStudent" HorizontalAlignment="Left" Margin="62,322,0,0" VerticalAlignment="Top" Width="500" Height="60"
+                    <ComboBox x:Name="comboBoxCreateSpecialityStudent" ItemsSource="{Binding specialities}" SelectedItem="{Binding student.Group1.Speciality1.SpecialityName}" HorizontalAlignment="Left" Margin="62,322,0,0" VerticalAlignment="Top" Width="500" Height="60"
                         materialDesign:HintAssist.Hint="Специальность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding SpecialityName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <TextBox x:Name="textBoxCreatePasswordStudent" HorizontalAlignment="Left" Height="60" Margin="62,452,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Пароль" FontSize="20"
@@ -188,9 +195,16 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Button Content="ЗАРЕГИСТРИРОВАТЬ" FontSize="20" HorizontalAlignment="Left" Height="60" Margin="809,62,0,0" VerticalAlignment="Top" Width="254" Click="Button_Click_3" />
-                    <ComboBox x:Name="comboBoxCreateRoleTeacher" HorizontalAlignment="Left" Margin="62,387,0,0" VerticalAlignment="Top" Width="500" Height="60"
+                    <ComboBox x:Name="comboBoxCreateRoleTeacher" ItemsSource="{Binding roles}" SelectedItem="{Binding teacher.Role1.RoleName}" HorizontalAlignment="Left" Margin="62,387,0,0" VerticalAlignment="Top" Width="500" Height="60"
                         materialDesign:HintAssist.Hint="Должность" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding RoleName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <TabControl HorizontalAlignment="Left" Height="793" Margin="809,167,0,0" VerticalAlignment="Top" Width="921" Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem Header="Создать должность">
