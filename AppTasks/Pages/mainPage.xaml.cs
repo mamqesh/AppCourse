@@ -27,8 +27,8 @@ namespace AppTasks.Pages
         {
             InitializeComponent();
 #if DEBUG
-            textBoxLogin.Text = "1222";
-            passwordBoxPassword.Password = "group263";
+            textBoxLogin.Text = "1282";
+            passwordBoxPassword.Password = "qwerty123";
 #endif
         }
         void ClearElements()
@@ -57,6 +57,7 @@ namespace AppTasks.Pages
                 if (teacher != null)
                 {
                     ClearElements();
+                    MainWindow.pageTeacherPage.SetTeacher(teacher);
                     NavigationService.Navigate(MainWindow.pageTeacherPage);
                     tryExit++;
                     return;

@@ -29,7 +29,6 @@ namespace AppTasks.Pages
             LoadSubject();
             //LoadUser();
         }
-
         public void SetStudent(Student s)
         {
             student = s;
@@ -55,7 +54,6 @@ namespace AppTasks.Pages
             }
 
         }
-
         void ClearElements()
         {
             labelRole.Content = "";
@@ -77,7 +75,6 @@ namespace AppTasks.Pages
             ClearElements();
             NavigationService.GoBack();
         }
-
         private void listBoxSubject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             listBoxTheme.SelectedIndex = -1;
@@ -95,7 +92,6 @@ namespace AppTasks.Pages
                 }
             }
         }
-
         private void listBoxTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             NavigationService.Navigate(MainWindow.pageThemePage);
