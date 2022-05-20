@@ -23,6 +23,7 @@ namespace AppTasks.Pages
     {
         danil2Entities2 connection = new danil2Entities2();
         public static Database.Teacher teacher;
+        public static Database.Role role { get; set; }
         public static List<Database.Teacher> teachers { get; set; }
         public teacherPage()
         {
@@ -36,7 +37,7 @@ namespace AppTasks.Pages
             labelSurname.Content = s.Surname;
             labelName.Content = s.Name;
             labelPatronymic.Content = s.Patronymic;
-            labelRole.Content = s.Role1;
+            labelRole.Content = s.Role1.RoleName;
             if (s.Sex == 2)
             {
                 BitmapImage image = new BitmapImage();

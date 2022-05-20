@@ -202,6 +202,7 @@ namespace AppTasks.Pages
             if (login.Length == 0 || name.Length == 0 || surname.Length == 0 || patronymic.Length == 0 || password.Length == 0 || sex.Length == 0 || role.Length == 0)
             {
                 MessageBox.Show("Вы ввели не все данные");
+                return;
             }
             else
             {
@@ -210,7 +211,7 @@ namespace AppTasks.Pages
                 teacher.Name = name;
                 teacher.Surname = surname;
                 teacher.Patronymic = patronymic;
-                teacher.Sex = 1;
+                teacher.Sex = int.Parse(sex);
                 teacher.Password = password;
 
                 //role auto

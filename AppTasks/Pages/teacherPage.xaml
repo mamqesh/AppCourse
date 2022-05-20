@@ -18,7 +18,7 @@
         <Label x:Name="labelPatronymic" Content="Patronymic" FontSize="30" HorizontalAlignment="Right" Margin="0,625,1477,0" VerticalAlignment="Top" Height="56" Width="384"/>
         <Image x:Name="imageWindow" Margin="0,0,1577,652" Source="/AppTasks;component/man.png" Stretch="Fill" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom"/>
         <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1"/>
-        <Label x:Name="labelRole" Content="{Binding RoleName}" FontSize="30" HorizontalAlignment="Right" Margin="0,686,1477,0" VerticalAlignment="Top" Height="56" Width="384">
+        <Label x:Name="labelRole" Content="{Binding Role1.RoleName}" FontSize="30" HorizontalAlignment="Right" Margin="0,686,1477,0" VerticalAlignment="Top" Height="56" Width="384">
         </Label>
 
     </Grid>
