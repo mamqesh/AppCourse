@@ -206,16 +206,21 @@ namespace AppTasks.Pages
             }
             else
             {
+                if (comboBoxCreateSexTeacher.SelectedIndex < 0 || comboBoxCreateRoleTeacher.SelectedIndex < 0)
+                {
+
+                    return;
+                }
+
                 Database.Teacher teacher = new Database.Teacher();
                 teacher.PersonnelNumber = int.Parse(login);
                 teacher.Name = name;
                 teacher.Surname = surname;
                 teacher.Patronymic = patronymic;
-                teacher.Sex = int.Parse(sex);
                 teacher.Password = password;
 
-                //role auto
-                teacher.Role = 1;
+                teacher.Sex1 = comboBoxCreateSexTeacher.SelectedItem as Sex;
+                teacher.Role1 = comboBoxCreateRoleTeacher.SelectedItem as Role;
 
                 connection.Teacher.Add(teacher);
                 int result = connection.SaveChanges();
