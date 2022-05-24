@@ -153,11 +153,9 @@ namespace AppTasks.Pages
                 student.Name = name;
                 student.Surname = surname;
                 student.Patronymic = patronymic;
-
-                //sex combobox
-                student.Sex = 1;
+                student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
                 //group auto
-                student.Group = 3063;
+                student.Group = 2063;
 
                 student.Password = "group" + 3063;
                 connection.Student.Add(student);
@@ -173,7 +171,18 @@ namespace AppTasks.Pages
                 }
             }
         }
-        private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
+        private void comboBoxCreateSpecialityStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //    if (comboBoxCreateSpecialityStudent != null)
+            //    {
+            //        var specialityName = connection.Group.ToList();
+            //        foreach (var _specialityName in specialityName)
+            //        {
+
+            //        }
+            //    }
+        }
+    private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
         {
             string login = textBoxCreatePersonnelNumberTeacher.Text.Trim();
             string name = textBoxCreateNameTeacher.Text.Trim();
@@ -211,17 +220,14 @@ namespace AppTasks.Pages
 
                     return;
                 }
-
                 Database.Teacher teacher = new Database.Teacher();
                 teacher.PersonnelNumber = int.Parse(login);
                 teacher.Name = name;
                 teacher.Surname = surname;
                 teacher.Patronymic = patronymic;
                 teacher.Password = password;
-
                 teacher.Sex1 = comboBoxCreateSexTeacher.SelectedItem as Sex;
                 teacher.Role1 = comboBoxCreateRoleTeacher.SelectedItem as Role;
-
                 connection.Teacher.Add(teacher);
                 int result = connection.SaveChanges();
                 if (result == 1)
@@ -262,77 +268,100 @@ namespace AppTasks.Pages
         private void Button_Click_4(object sender, RoutedEventArgs e)//СОЗДАТЬ ДОЛЖНОСТЬ
         {
             string roleTextBox = textBoxCreateRole.Text.Trim();
-            void ClearItem()
+            if (roleTextBox.Length==0)
             {
-                textBoxCreateRole.Clear();
-                roleTextBox = "";
-            }
-
-            Database.Role role = new Role();
-            int roleID = connection.Role.ToList().Count() + 1;
-            role.RoleID = roleID;
-            role.RoleName = roleTextBox;
-            connection.Role.Add(role);
-            int result = connection.SaveChanges();
-            if (result > 1)
-            {
-                ClearItem();
-                MessageBox.Show("Специальность добавлена");
+                MessageBox.Show("Вы не ввели данные");
+                return;
             }
             else
             {
-                ClearItem();
-                MessageBox.Show("Ошибка добавления");
+                void ClearItem()
+                {
+                    textBoxCreateRole.Clear();
+                    roleTextBox = "";
+                }
+                Database.Role role = new Role();
+                int roleID = connection.Role.ToList().Count() + 1;
+                role.RoleID = roleID;
+                role.RoleName = roleTextBox;
+                connection.Role.Add(role);
+                int result = connection.SaveChanges();
+                if (result > 0)
+                {
+                    MessageBox.Show("Специальность добавлена");
+                    ClearItem();
+                }
+                else
+                {
+                    ClearItem();
+                    MessageBox.Show("Ошибка добавления");
+                }
             }
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)//СОЗДАТЬ ПРЕДМЕТ
         {
             string subjectTextBox = textBoxCreateSubject.Text.Trim();
-            void ClearItem()
+            if (subjectTextBox.Length==0)
             {
-                textBoxCreateSubject.Clear();
-                subjectTextBox = "";
-            }
-            Database.Subject subject = new Subject();
-            int subjectID = connection.Subject.ToList().Count() + 1;
-            subject.SubjectID = subjectID;
-            subject.SubjectName = subjectTextBox;
-            connection.Subject.Add(subject);
-            int result = connection.SaveChanges();
-            if (result > 1)
-            {
-                ClearItem();
-                MessageBox.Show("Специальность добавлена");
+                MessageBox.Show("Вы не ввели данные");
+                return;
             }
             else
             {
-                ClearItem();
-                MessageBox.Show("Ошибка добавления");
-            }
+                void ClearItem()
+                {
+                    textBoxCreateSubject.Clear();
+                    subjectTextBox = "";
+                }
+                Database.Subject subject = new Subject();
+                int subjectID = connection.Subject.ToList().Count() + 1;
+                subject.SubjectID = subjectID;
+                subject.SubjectName = subjectTextBox;
+                connection.Subject.Add(subject);
+                int result = connection.SaveChanges();
+                if (result > 0)
+                {
+                    MessageBox.Show("Специальность добавлена");
+                    ClearItem();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления");
+                    ClearItem();
+                }
+            } 
         }
         private void Button_Click_6(object sender, RoutedEventArgs e) //СОЗДАТЬ СПЕЦИАЛЬНОСТЬ
         {
             string specialityTextBox = textBoxCreateRole.Text.Trim();
-            void ClearItem()
+            if (specialityTextBox.Length==0)
             {
-                textBoxCreateRole.Clear();
-                specialityTextBox = "";
-            }
-            Database.Speciality speciality = new Speciality();
-            int roleID = connection.Speciality.ToList().Count() + 1;
-            speciality.IDSpeciality = roleID;
-            speciality.SpecialityName = specialityTextBox;
-            connection.Speciality.Add(speciality);
-            int result = connection.SaveChanges();
-            if (result > 1)
-            {
-                ClearItem();
-                MessageBox.Show("Специальность добавлена");
+                MessageBox.Show("Вы не ввели данные");
+                return;
             }
             else
             {
-                ClearItem();
-                MessageBox.Show("Ошибка добавления");
+                void ClearItem()
+                {
+                    textBoxCreateRole.Clear();
+                    specialityTextBox = "";
+                }
+                Database.Speciality speciality = new Speciality();
+                int roleID = connection.Speciality.ToList().Count() + 1;
+                speciality.IDSpeciality = roleID;
+                speciality.SpecialityName = specialityTextBox;
+                connection.Speciality.Add(speciality);
+                int result = connection.SaveChanges();
+                if (result > 0)
+                {
+                    MessageBox.Show("Специальность добавлена");
+                    ClearItem();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления");
+                    ClearItem();
+                }
             }
         }
     }

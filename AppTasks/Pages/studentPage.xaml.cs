@@ -73,8 +73,7 @@ namespace AppTasks.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             ClearElements();
-            NavigationService.GoBack();
-        }
+            NavigationService.GoBack();        }
         private void listBoxSubject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             listBoxTheme.SelectedIndex = -1;

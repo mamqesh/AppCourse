@@ -127,16 +127,16 @@
                     <TextBox x:Name="textBoxCreatePatronymicStudent" HorizontalAlignment="Left" Height="60" Margin="62,192,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Отчество" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBoxCreateGroupStudent" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
+                    <TextBox x:Name="textBoxCreateGroupStudent" Text="{Binding SpecialityName}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Группа" FontSize="20"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" IsReadOnly="True"/>
 
                     <TextBox x:Name="textBoxCreateStudentTicketStudent" HorizontalAlignment="Left" Height="60" Margin="62,387,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Логин(студенческий билет)" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
                     <ComboBox x:Name="comboBoxCreateSpecialityStudent" ItemsSource="{Binding specialities}" SelectedItem="{Binding student.Group1.Speciality1.SpecialityName}" HorizontalAlignment="Left" Margin="62,322,0,0" VerticalAlignment="Top" Width="500" Height="60"
                         materialDesign:HintAssist.Hint="Специальность" FontSize="20"
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectionChanged="comboBoxCreateSpecialityStudent_SelectionChanged">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
