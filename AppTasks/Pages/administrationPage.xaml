@@ -127,9 +127,21 @@
                     <TextBox x:Name="textBoxCreatePatronymicStudent" HorizontalAlignment="Left" Height="60" Margin="62,192,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Отчество" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBoxCreateGroupStudent" Text="{Binding SpecialityName}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
+                    <!--<TextBox x:Name="textBoxCreateGroupStudent" Text="{Binding SpecialityName}" HorizontalAlignment="Left" Height="60" Margin="62,257,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Группа" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" VerticalAlignment="Top" IsReadOnly="True"/>
+                    -->
+                    <ComboBox x:Name="comboBoxCreateGroupStudent" ItemsSource="{Binding groups}" HorizontalAlignment="Left" Margin="62,257,0,0" VerticalAlignment="Top" Width="500" Height="60"
+                        materialDesign:HintAssist.Hint="Группа" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding IDGroup}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
                     <TextBox x:Name="textBoxCreateStudentTicketStudent" HorizontalAlignment="Left" Height="60" Margin="62,387,0,0" TextWrapping="Wrap" Width="500"
                         materialDesign:HintAssist.Hint="Логин(студенческий билет)" FontSize="20"

@@ -173,15 +173,19 @@ namespace AppTasks.Pages
         }
         private void comboBoxCreateSpecialityStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //    if (comboBoxCreateSpecialityStudent != null)
+            var spec = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
+            groups = spec.Group.ToList();
+            comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();
+            //textBoxCreateGroupStudent.Text = "";
+            //if (comboBoxCreateSpecialityStudent != null)
+            //{
+            //    var specialityName = connection.Group.ToList();
+            //    foreach (var _specialityName in specialityName)
             //    {
-            //        var specialityName = connection.Group.ToList();
-            //        foreach (var _specialityName in specialityName)
-            //        {
-
-            //        }
+            //        textBoxCreateGroupStudent.Text = _specialityName.Speciality1.SpecialityName;
             //    }
-        }
+            //}
+        } // ДОБАВЛЕНИЕ НОМЕРА ГРУППЫ
     private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
         {
             string login = textBoxCreatePersonnelNumberTeacher.Text.Trim();

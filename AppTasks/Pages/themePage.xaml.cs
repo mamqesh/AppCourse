@@ -29,10 +29,33 @@ namespace AppTasks.Pages
         public void SetTheme(int themeID)
         {
             var option = connection.Option.Where(o => o.Theme == themeID).ToList();
+
+            var q = new Dictionary<int, string>();
+
             foreach (var options in option)
             {
-                
+                q[options.Question] = options.Question1.Question1;
             }
+
+            foreach (var question in q) 
+            { 
+                var a = connection.Option.Where(o => o.Theme == themeID && o.Question == question.Key).ToList();
+
+                Console.WriteLine("\nВОПРОС");
+                Console.WriteLine(question.Value);
+
+                Console.WriteLine("\nВАРИАНТЫ ОТВЕТОВ");
+                foreach (var b in a)
+                {
+                    if (b.OptionText.TrueFalse == "True")
+                    {
+                        Console.Write("X ");
+                    }
+
+                    Console.WriteLine(b.OptionText.Answer);
+                }
+            }
+            //radio button
         }
     }
 }
