@@ -36,12 +36,10 @@ namespace AppTasks.Pages
                 listBoxSubject.Items.Add(_subject);
             }
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)//НАЗАД
         {
             NavigationService.GoBack();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)//СОЗДАТЬ ТЕМУ С ВОПРОСАМИ
         {
 

@@ -275,7 +275,8 @@ namespace AppTasks.Pages
                 MessageBox.Show("Вы не ввели данные");
                 return;
             }
-            else
+            var roles = connection.Role.Where(r => r.RoleName == roleTextBox).FirstOrDefault();
+            if (roles == null)
             {
                 void ClearItem()
                 {
@@ -299,6 +300,10 @@ namespace AppTasks.Pages
                     MessageBox.Show("Ошибка добавления");
                 }
             }
+            else
+            {
+                MessageBox.Show("Должность уже существует");
+            }
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)//СОЗДАТЬ ПРЕДМЕТ
         {
@@ -308,7 +313,8 @@ namespace AppTasks.Pages
                 MessageBox.Show("Вы не ввели данные");
                 return;
             }
-            else
+            var subjects = connection.Subject.Where(s => s.SubjectName == subjectTextBox).FirstOrDefault();
+            if(subjects==null)
             {
                 void ClearItem()
                 {
@@ -331,7 +337,11 @@ namespace AppTasks.Pages
                     MessageBox.Show("Ошибка добавления");
                     ClearItem();
                 }
-            } 
+            }
+            else
+            {
+                MessageBox.Show("Предмет существует");
+            }
         }
         private void Button_Click_6(object sender, RoutedEventArgs e) //СОЗДАТЬ СПЕЦИАЛЬНОСТЬ
         {
@@ -341,7 +351,8 @@ namespace AppTasks.Pages
                 MessageBox.Show("Вы не ввели данные");
                 return;
             }
-            else
+            var specialities= connection.Speciality.Where(s => s.SpecialityName == specialityTextBox).FirstOrDefault();
+            if (specialities==null)
             {
                 void ClearItem()
                 {
@@ -364,6 +375,10 @@ namespace AppTasks.Pages
                     MessageBox.Show("Ошибка добавления");
                     ClearItem();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Специальность существует");
             }
         }
     }

@@ -26,6 +26,7 @@ namespace AppTasks
         public static Pages.administrationPage pageAdministrationPage;
         public static Pages.themePage pageThemePage;
         public static Pages.addTestPage pageAddTestPage;
+        public static Pages.addQuestionsPage pageAddQuestionsPage;
         public static MainWindow Instance;
         public MainWindow()
         {
@@ -38,6 +39,7 @@ namespace AppTasks
             pageAdministrationPage = new Pages.administrationPage();
             pageThemePage = new Pages.themePage();
             pageAddTestPage = new Pages.addTestPage();
+            pageAddQuestionsPage = new Pages.addQuestionsPage();
             MainFrame.Navigate(pageMainPage);
         }
     }

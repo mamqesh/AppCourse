@@ -27,7 +27,6 @@ namespace AppTasks.Pages
         {
             InitializeComponent();
             LoadSubject();
-            //LoadUser();
         }
         public void SetStudent(Student s)
         {
