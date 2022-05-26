@@ -123,8 +123,6 @@ namespace AppTasks.Pages
             string patronymic = textBoxCreatePatronymicStudent.Text.Trim();
             string login = textBoxCreateStudentTicketStudent.Text.Trim();
             string password = textBoxCreatePasswordStudent.Text.Trim();
-            string sex = comboBoxSexStudent.SelectedItem.ToString();
-            string speciality = comboBoxCreateSpecialityStudent.SelectedItem.ToString();
             void ClearTextBox()
             {
                 surname = "";
@@ -132,8 +130,6 @@ namespace AppTasks.Pages
                 patronymic = "";
                 login = "";
                 password = "";
-                sex = "";
-                speciality = "";
                 textBoxCreateSurnameStudent.Clear();
                 textBoxCreateNameStudent.Clear();
                 textBoxCreatePatronymicStudent.Clear();
@@ -142,7 +138,7 @@ namespace AppTasks.Pages
                 comboBoxSexStudent.SelectedIndex = -1;
                 comboBoxCreateSpecialityStudent.SelectedIndex = -1;
             }
-            if (surname.Length == 0 || name.Length == 0 || patronymic.Length == 0 || login.Length == 0 || sex.Length == 0 || speciality.Length == 0 || password.Length == 0)
+            if (surname.Length == 0 || name.Length == 0 || patronymic.Length == 0 || login.Length == 0 || password.Length == 0)
             {
                 MessageBox.Show("Вы ввели не все данные");
             }
@@ -154,10 +150,8 @@ namespace AppTasks.Pages
                 student.Surname = surname;
                 student.Patronymic = patronymic;
                 student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
-                //group auto
-                student.Group = 2063;
-
-                student.Password = "group" + 3063;
+                student.Group = Convert.ToInt32(comboBoxCreateGroupStudent.SelectedItem as Group);
+                student.Password = "group" + Convert.ToInt32(comboBoxCreateGroupStudent.SelectedItem as Group);
                 connection.Student.Add(student);
                 int result = connection.SaveChanges();
                 if (result == 1)
@@ -171,10 +165,14 @@ namespace AppTasks.Pages
                 }
             }
         }
+        private void comboBoxCreateGroupStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            textBoxCreatePasswordStudent.Text = "group" + comboBoxCreateGroupStudent.ToString();
+        }
         private void comboBoxCreateSpecialityStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var spec = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
-            groups = spec.Group.ToList();
+            var speciality = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
+            groups = speciality.Group.ToList();
             comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();
             //textBoxCreateGroupStudent.Text = "";
             //if (comboBoxCreateSpecialityStudent != null)
@@ -221,7 +219,7 @@ namespace AppTasks.Pages
             {
                 if (comboBoxCreateSexTeacher.SelectedIndex < 0 || comboBoxCreateRoleTeacher.SelectedIndex < 0)
                 {
-
+                    MessageBox.Show("Данные заполнены не все");
                     return;
                 }
                 Database.Teacher teacher = new Database.Teacher();

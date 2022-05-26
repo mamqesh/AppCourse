@@ -7,9 +7,28 @@
       xmlns:local="clr-namespace:AppTasks.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="themePage">
+      Title="themePage" Background="White">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="293*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="745*"/>
+            <RowDefinition Height="174*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Blush projecting others meant warmly longer outlived others tried." FontWeight="Bold" FontSize="25" HorizontalAlignment="Center" Margin="24,10,36,10" VerticalAlignment="Center" Height="96" Width="1860" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <RadioButton Content="Excuse painful months lady followed terms reasonably roused unpacked belonging. Spring extensive gone rapturous. " FontSize="25" HorizontalAlignment="Left" Margin="10,251,0,0" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1"
+                     Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+        <RadioButton Content="Just maids plate. Half world shall four. Pressed were terms than what offence.  " FontSize="25" HorizontalAlignment="Left" Margin="10,307,0,0" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1"
+            Style="{StaticResource ResourceKey=MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+        <RadioButton Content="Unknown perceived new considered husband match only then stimulated sixteen " FontSize="25" HorizontalAlignment="Left" Margin="10,363,0,0" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1"
+            Style="{StaticResource ResourceKey=MaterialDesignChoiceChipAccentOutlineRadioButton}"/>
+        <Image Margin="0,10,0,660" Grid.Row="2" Source="/AppTasks;component/PfBnQ.png" Stretch="Fill" Grid.ColumnSpan="2"/>
+        <Button Content="ДАЛЕЕ" FontSize="20" HorizontalAlignment="Center" Height="60" Margin="1398,10,106,104" VerticalAlignment="Center" Width="254" Grid.Column="1" Grid.Row="3" Click="Button_Click" />
+
     </Grid>
 </Page>
