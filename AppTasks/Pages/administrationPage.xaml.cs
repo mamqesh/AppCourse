@@ -150,8 +150,10 @@ namespace AppTasks.Pages
                 student.Surname = surname;
                 student.Patronymic = patronymic;
                 student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
+
                 student.Group = Convert.ToInt32(comboBoxCreateGroupStudent.SelectedItem as Group);
                 student.Password = "group" + Convert.ToInt32(comboBoxCreateGroupStudent.SelectedItem as Group);
+
                 connection.Student.Add(student);
                 int result = connection.SaveChanges();
                 if (result == 1)
@@ -174,15 +176,6 @@ namespace AppTasks.Pages
             var speciality = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
             groups = speciality.Group.ToList();
             comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();
-            //textBoxCreateGroupStudent.Text = "";
-            //if (comboBoxCreateSpecialityStudent != null)
-            //{
-            //    var specialityName = connection.Group.ToList();
-            //    foreach (var _specialityName in specialityName)
-            //    {
-            //        textBoxCreateGroupStudent.Text = _specialityName.Speciality1.SpecialityName;
-            //    }
-            //}
         } // ДОБАВЛЕНИЕ НОМЕРА ГРУППЫ
     private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
         {
@@ -329,7 +322,7 @@ namespace AppTasks.Pages
                 int result = connection.SaveChanges();
                 if (result > 0)
                 {
-                    MessageBox.Show("Специальность добавлена");
+                    MessageBox.Show("Предмет добавлен");
                     ClearItem();
                 }
                 else
@@ -379,7 +372,12 @@ namespace AppTasks.Pages
             else
             {
                 MessageBox.Show("Специальность существует");
+              
             }
         }
     }
 }
+//if (MessageBox.Show("Да/Нет?","Да",MessageBoxButton.YesNo)==MessageBoxResult.Yes)
+//{
+
+//}

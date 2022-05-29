@@ -26,7 +26,7 @@ namespace AppTasks.Pages
         {
             InitializeComponent();
         }
-        public void SetTheme(Theme t)
+        public void SetTheme(Theme t, Subject s)
         {
 
         }

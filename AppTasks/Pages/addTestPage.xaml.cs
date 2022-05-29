@@ -38,11 +38,30 @@ namespace AppTasks.Pages
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)//НАЗАД
         {
+            textBoxAddNameTheme.Text = "";
+            listBoxSubject.SelectedIndex = -1;
             NavigationService.GoBack();
         }
         private void Button_Click(object sender, RoutedEventArgs e)//СОЗДАТЬ ТЕМУ С ВОПРОСАМИ
         {
-
+            string theme = textBoxAddNameTheme.Text.Trim();
+            if (theme.Length == 0)
+            {
+                MessageBox.Show("Вы не ввели название темы");
+                return;
+            }
+            else
+            {
+                if (listBoxSubject.SelectedItem==null)
+                {
+                    MessageBox.Show("Вы не выбрали предмет");
+                    return;
+                }
+                else
+                {
+                    NavigationService.Navigate(MainWindow.pageAddQuestionsPage);
+                }
+            }
         }
     }
 }
