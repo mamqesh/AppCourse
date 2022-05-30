@@ -268,6 +268,7 @@ namespace AppTasks.Pages
                 MessageBox.Show("Вы не ввели данные");
                 return;
             }
+            //ОГРАНИЧЕНИЕ
             var roles = connection.Role.Where(r => r.RoleName == roleTextBox).FirstOrDefault();
             if (roles == null)
             {
@@ -306,6 +307,7 @@ namespace AppTasks.Pages
                 MessageBox.Show("Вы не ввели данные");
                 return;
             }
+            //ОГРАНИЧЕНИЕ
             var subjects = connection.Subject.Where(s => s.SubjectName == subjectTextBox).FirstOrDefault();
             if(subjects==null)
             {

@@ -251,6 +251,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="strelka.png" />
     <Resource Include="zamok.png" />
     <Resource Include="pngwing.com %284%29.png" />
     <Resource Include="vopros_znak.png" />
