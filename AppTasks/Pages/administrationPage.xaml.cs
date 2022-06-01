@@ -151,8 +151,8 @@ namespace AppTasks.Pages
                 student.Patronymic = patronymic;
                 student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
 
-                student.Group = Convert.ToInt32(comboBoxCreateGroupStudent.SelectedItem as Group);
-                student.Password = "group" + Convert.ToInt32(comboBoxCreateGroupStudent.SelectedItem as Group);
+                student.Group1 = comboBoxCreateGroupStudent.SelectedItem as Group;
+                student.Password = textBoxCreatePasswordStudent.Text.Trim();
 
                 connection.Student.Add(student);
                 int result = connection.SaveChanges();
@@ -169,13 +169,16 @@ namespace AppTasks.Pages
         }
         private void comboBoxCreateGroupStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            textBoxCreatePasswordStudent.Text = "group" + comboBoxCreateGroupStudent.ToString();
+            textBoxCreatePasswordStudent.Text = "group" + (comboBoxCreateGroupStudent.SelectedItem as Group).IDGroup;
         }
         private void comboBoxCreateSpecialityStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var speciality = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
-            groups = speciality.Group.ToList();
-            comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();
+            if (comboBoxCreateSpecialityStudent.SelectedIndex!=-1)
+            {
+                var speciality = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
+                groups = speciality.Group.ToList();
+                comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();
+            }
         } // ДОБАВЛЕНИЕ НОМЕРА ГРУППЫ
     private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
         {
