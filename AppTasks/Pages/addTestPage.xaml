@@ -20,7 +20,7 @@
             <ColumnDefinition Width="131*"/>
         </Grid.ColumnDefinitions>
         <Button Content="НАЗАД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1"/>
-        <ListBox Name="listBoxSubject" FontSize="20" HorizontalAlignment="Left" Height="151" Margin="41,30,0,0" VerticalAlignment="Top" Width="786" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}" Grid.Row="1">
+        <ListBox Name="listBoxSubject" FontSize="20" HorizontalAlignment="Left" Height="151" Margin="41,30,0,0" VerticalAlignment="Top" Width="786" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}" Grid.Row="1" SelectionChanged="listBoxSubject_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -31,12 +31,12 @@
         </ListBox>
         <TextBox Name="textBoxAddNameTheme" HorizontalAlignment="Left" Height="68" Margin="10,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="700" Grid.Column="1" Grid.Row="1"
                    Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Название темы" FontSize="20"/>
-        <Button Content="СОЗДАТЬ" FontSize="20" HorizontalAlignment="Left" Margin="669,696,0,0" VerticalAlignment="Top" Width="280" Height="64" Grid.Column="1" Grid.Row="2" Click="Button_Click"/>
+        <Button Content="СОЗДАТЬ" FontSize="20" HorizontalAlignment="Left" Margin="738,30,0,0" VerticalAlignment="Top" Width="280" Height="64" Grid.Column="1" Grid.Row="1" Click="Button_Click"/>
         <Button HorizontalAlignment="Left" Margin="745,36,0,0" Grid.Row="2" VerticalAlignment="Top" Width="90" Height="78"
                 Style="{StaticResource MaterialDesignFlatLightButton}" Click="Button_Click_2">
             <Image Source="/AppTasks;component/plus.png" Height="50" Width="50"/>
         </Button>
-        <StackPanel HorizontalAlignment="Left" Height="650" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="852">
+        <StackPanel HorizontalAlignment="Left" Height="424" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="852">
             <TextBox Name="textBoxQuestion" Height="70" Width="700" HorizontalAlignment="Left" Margin="30" 
                      materialDesign:HintAssist.Hint="Вопрос" FontSize="25" Style="{StaticResource  ResourceKey=MaterialDesignOutlinedTextBox}"/>
             <TextBox x:Name="textBoxOption1" Height="70" Width="700" HorizontalAlignment="Left" Margin="30,10,0,0" 
@@ -50,7 +50,18 @@
             <CheckBox x:Name="radioButton3" Height="70" Width="70" Margin="744,-70,38,0" VerticalAlignment="Top" Style="{StaticResource MaterialDesignActionDarkCheckBox}"/>
 
         </StackPanel>
-        <ListBox Name="listBoxQuestions" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Height="650" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="1028"/>
+        <ListBox Name="listBoxQuestions" FontSize="25" HorizontalAlignment="Left" Height="309" Margin="10,451,0,0" Grid.Row="2" VerticalAlignment="Top" Width="825"/>
+        <ListBox x:Name="listBoxTheme" ItemsSource="{Binding themes}" FontSize="25" HorizontalAlignment="Left" Height="655" Margin="10,105,0,0" Grid.Row="2" VerticalAlignment="Top" Width="700" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding ThemeName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBox x:Name="textBoxSearchTheme" HorizontalAlignment="Left" Height="49" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="700" Grid.Column="1" Grid.Row="2"
+             materialDesign:HintAssist.Hint="Поиск темы" FontSize="20" TextChanged="textBoxSearchTheme_TextChanged"/>
 
     </Grid>
 </Page>
