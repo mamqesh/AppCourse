@@ -40,7 +40,8 @@ namespace AppTasks
             pageThemePage = new Pages.themePage();
             pageAddTestPage = new Pages.addTestPage();
             pageAddQuestionsPage = new Pages.addQuestionsPage();
-            MainFrame.Navigate(pageMainPage);
+            //MainFrame.Navigate(pageMainPage);
+            MainFrame.Navigate(pageThemePage);
         }
     }
 }
