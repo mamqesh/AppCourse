@@ -382,7 +382,3 @@ namespace AppTasks.Pages
         }
     }
 }
-//if (MessageBox.Show("Да/Нет?","Да",MessageBoxButton.YesNo)==MessageBoxResult.Yes)
-//{
-
-//}

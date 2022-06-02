@@ -50,43 +50,40 @@ namespace AppTasks.Pages
             {
                 var optionTheme = connection.Option.Where(o => o.Theme == themeID && o.Question == _questions.Key).ToList();
 
-                //Console.WriteLine("\nВОПРОС");
-                //Console.WriteLine(_questions.Value);
+               
                 questionOptions.Add(new QuestionOption()
                 {
                     question = _questions.Value,
                     option = optionTheme,
                 });
-
-                //Console.WriteLine("\nВАРИАНТЫ ОТВЕТОВ");
-                //foreach (var _optionTheme in optionTheme)
-                //{
-                //    if (_optionTheme.OptionText.TrueFalse == "True")
-                //    {
-                //        Console.Write("X ");
-                //    }
-                //    Console.WriteLine(_optionTheme.OptionText.Answer);
-                //}
-
                 labelNameQuestion.Content = questionOptions[themeIndex].question;
                 radioButton1.Content = questionOptions[themeIndex].option[0].OptionText.Answer;
                 radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
                 radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
-
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)//ДАЛЕЕ
+        void nextQuestion()
         {
-            
-
             themeIndex++;
             labelNameQuestion.Content = questionOptions[themeIndex].question;
             radioButton1.Content = questionOptions[themeIndex].option[0].OptionText.Answer;
             radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
             radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
-
-
-
+            radioButton1.IsChecked = null;
+            radioButton2.IsChecked = null;
+            radioButton3.IsChecked = null;
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)//ДАЛЕЕ
+        {
+            if (radioButton1.IsChecked==true||radioButton2.IsChecked==true||radioButton3.IsChecked==true)
+            {
+                nextQuestion();
+            }
+            else
+            {
+                MessageBox.Show("Вам необходимо выбрать ответ");
+            }
+          
         }
     }
 }

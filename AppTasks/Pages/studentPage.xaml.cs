@@ -92,8 +92,19 @@ namespace AppTasks.Pages
         }
         private void listBoxTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            NavigationService.Navigate(MainWindow.pageThemePage);
-            MainWindow.pageThemePage.SetTheme(((Theme)listBoxTheme.SelectedItem).ThemeID);
+            if (MessageBox.Show("Вы действительно хотите пройти тестирование?", "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                NavigationService.Navigate(MainWindow.pageThemePage);
+                if (listBoxTheme.SelectedItem!=null)
+                {
+                    MainWindow.pageThemePage.SetTheme(((Theme)listBoxTheme.SelectedItem).ThemeID);
+                }
+            }
+            else
+            {
+                listBoxTheme.SelectedIndex = -1;
+                return;
+            }
         }
     }
 }

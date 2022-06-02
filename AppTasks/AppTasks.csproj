@@ -130,9 +130,6 @@
     <Compile Include="Database\Subject.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\Teacher.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -247,6 +244,7 @@
     <Resource Include="vopros_znak.png" />
     <Resource Include="PfBnQ.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -258,6 +256,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.5.0\build\MaterialDesignThemes.targets')" />
