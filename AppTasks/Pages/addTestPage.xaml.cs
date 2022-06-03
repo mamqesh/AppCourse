@@ -155,59 +155,54 @@ namespace AppTasks.Pages
                     }
                     if (MessageBox.Show("Вы действительно хотите добавить вопрос?", "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
+                        int countID = connection.OptionText.ToList().Count();
                         listBoxQuestions.Items.Add(textBoxQuestion.Text);
                         if (radioButton1.IsChecked == true)
                         {
-                            optionText.IDOptionText = connection.OptionText.ToList().Count() + 1;
+                            optionText.IDOptionText = countID + 1;
                             optionText.Answer = option1;
                             optionText.TrueFalse = "True";
                             connection.OptionText.Add(optionText);
-                            connection.SaveChanges();
-
                         }
-                        else
+                        if (radioButton1.IsChecked == false)
                         {
-                            optionText.IDOptionText = connection.OptionText.ToList().Count() + 1;
+                            optionText.IDOptionText = countID + 1;
                             optionText.Answer = option1;
                             optionText.TrueFalse = "False";
                             connection.OptionText.Add(optionText);
-                            connection.SaveChanges();
                         }
                         if (radioButton2.IsChecked == true)
                         {
-                            optionText.IDOptionText = connection.OptionText.ToList().Count() + 2;
+                            optionText.IDOptionText = countID + 1;
                             optionText.Answer = option2;
                             optionText.TrueFalse = "True";
                             connection.OptionText.Add(optionText);
-                            connection.SaveChanges();
                         }
-                        else
+                        if (radioButton2.IsChecked == false)
                         {
-                            optionText.IDOptionText = connection.OptionText.ToList().Count() + 2;
+                            optionText.IDOptionText = countID + 1;
                             optionText.Answer = option2;
                             optionText.TrueFalse = "False";
                             connection.OptionText.Add(optionText);
-                            connection.SaveChanges();
                         }
                         if (radioButton3.IsChecked == true)
                         {
-                            optionText.IDOptionText = connection.OptionText.ToList().Count() + 3;
+                            optionText.IDOptionText = countID + 1;
                             optionText.Answer = option3;
                             optionText.TrueFalse = "True";
                             connection.OptionText.Add(optionText);
-                            connection.SaveChanges();
                         }
-                        else
+                        if (radioButton3.IsChecked == false)
                         {
-                            optionText.IDOptionText = connection.OptionText.ToList().Count() + 3;
+                            optionText.IDOptionText = countID + 1;
                             optionText.Answer = option3;
                             optionText.TrueFalse = "False";
                             connection.OptionText.Add(optionText);
-                            connection.SaveChanges();
                         }
                         question.QuestionsID = connection.Question.ToList().Count() + 1;
                         question.Question1 = questionName;
                         question.Teacher = teacherPesonalNumber;
+                        question.Subject1 = listBoxSubject.SelectedItem as Database.Subject;
                         connection.Question.Add(question);
                         int result = connection.SaveChanges();
                         if (result > 0)
