@@ -62,8 +62,6 @@ CREATE TABLE [Question] (
 	QuestionsID integer primary key NOT NULL,
 	Question text NOT NULL,
 	Teacher integer NOT NULL,
-	[Subject] integer NOT NULL,
-	FOREIGN KEY ([Subject]) references [Subject](SubjectID),
 	Foreign key (Teacher) references Teacher(PersonnelNumber)
 )
 GO
@@ -164,11 +162,11 @@ INSERT INTO Theme (ThemeID, ThemeName, [Subject]) VALUES
 ('1','Смутное время','5')
 GO
 
-INSERT INTO [Question] (QuestionsID, Question, [Subject], Teacher) VALUES
-(1, N'Назовите одну из причин Смутного времени:', '5', '1163'),
-(2, N'По итогам Тридцатилетней войны был заключен?', '5', '1181'),
-(3, N'Когда закончилось Смутное время:', '5', '1163'),
-(4, N'Освобождение Москвы от польских интервентов удалось благодаря действиям:', '5', '1163')
+INSERT INTO [Question] (QuestionsID, Question, Teacher) VALUES
+(1, N'Назовите одну из причин Смутного времени:', '1163'),
+(2, N'По итогам Тридцатилетней войны был заключен?',, '1181'),
+(3, N'Когда закончилось Смутное время:', '1163'),
+(4, N'Освобождение Москвы от польских интервентов удалось благодаря действиям:', '1163')
 GO
 
 INSERT INTO OptionText(IDOptionText, Answer, TrueFalse) VALUES

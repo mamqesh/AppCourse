@@ -50,7 +50,7 @@
             <CheckBox x:Name="radioButton3" Height="70" Width="70" Margin="744,-70,38,0" VerticalAlignment="Top" Style="{StaticResource MaterialDesignActionDarkCheckBox}"/>
 
         </StackPanel>
-        <ListBox Name="listBoxQuestions" FontSize="25" HorizontalAlignment="Left" Height="309" Margin="10,451,0,0" Grid.Row="2" VerticalAlignment="Top" Width="825"/>
+        <ListBox Name="listBoxQuestions" FontSize="25" HorizontalAlignment="Left" Height="309" Margin="41,451,0,0" Grid.Row="2" VerticalAlignment="Top" Width="794"/>
         <ListBox x:Name="listBoxTheme" ItemsSource="{Binding themes}" FontSize="25" HorizontalAlignment="Left" Height="655" Margin="10,105,0,0" Grid.Row="2" VerticalAlignment="Top" Width="700" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>

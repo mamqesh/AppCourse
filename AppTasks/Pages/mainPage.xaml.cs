@@ -58,6 +58,7 @@ namespace AppTasks.Pages
                 {
                     ClearElements();
                     MainWindow.pageTeacherPage.SetTeacher(teacher);
+                    MainWindow.pageAddTestPage.Teacher(teacher);
                     NavigationService.Navigate(MainWindow.pageTeacherPage);
                     tryExit++;
                     return;
