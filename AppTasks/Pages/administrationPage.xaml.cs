@@ -109,7 +109,7 @@ namespace AppTasks.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e)//КНОПКА ВЫХОД
         {
             ClearTextBox();
-            NavigationService.GoBack();
+            NavigationService.Navigate(MainWindow.pageMainPage);
         }
         private void listBoxStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)//КЛИК ПО СТУДЕНТУ
         {
@@ -150,10 +150,8 @@ namespace AppTasks.Pages
                 student.Surname = surname;
                 student.Patronymic = patronymic;
                 student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
-
                 student.Group1 = comboBoxCreateGroupStudent.SelectedItem as Group;
                 student.Password = textBoxCreatePasswordStudent.Text.Trim();
-
                 connection.Student.Add(student);
                 int result = connection.SaveChanges();
                 if (result == 1)
@@ -169,12 +167,14 @@ namespace AppTasks.Pages
         }
         private void comboBoxCreateGroupStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            textBoxCreatePasswordStudent.Text = "";
             textBoxCreatePasswordStudent.Text = "group" + (comboBoxCreateGroupStudent.SelectedItem as Group).IDGroup;
         }
         private void comboBoxCreateSpecialityStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboBoxCreateSpecialityStudent.SelectedIndex!=-1)
             {
+                comboBoxCreateGroupStudent.Items.Clear();
                 var speciality = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
                 groups = speciality.Group.ToList();
                 comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();

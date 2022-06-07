@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppTasks.Database;
 
 namespace AppTasks
 {
@@ -20,6 +21,7 @@ namespace AppTasks
     /// </summary>
     public partial class MainWindow : Window
     {
+        danil2Entities2 connection = new danil2Entities2();
         public static Pages.mainPage pageMainPage;
         public static Pages.studentPage pageStudentPage;
         public static Pages.teacherPage pageTeacherPage;
@@ -27,11 +29,13 @@ namespace AppTasks
         public static Pages.themePage pageThemePage;
         public static Pages.addTestPage pageAddTestPage;
         public static Pages.addQuestionsPage pageAddQuestionsPage;
+        public static Pages.registrationAdmininstration pageRegistrationAdmininstrator;
         public static MainWindow Instance;
         public MainWindow()
         {
             
             InitializeComponent();
+            //CheckedAdmininstration();
             Instance = this;
             pageTeacherPage = new Pages.teacherPage();
             pageMainPage = new Pages.mainPage();
@@ -40,7 +44,58 @@ namespace AppTasks
             pageThemePage = new Pages.themePage();
             pageAddTestPage = new Pages.addTestPage();
             pageAddQuestionsPage = new Pages.addQuestionsPage();
-            MainFrame.Navigate(pageMainPage);
+            pageRegistrationAdmininstrator = new Pages.registrationAdmininstration();
+
+
+            var admin = connection.Admininstrator.ToList().Count();
+            if (admin == 0)
+            {
+                string messageBoxText = "Не найден пользователь Администратор. Для полного использования " +
+                   "функционала приложения нужно создать Администратора. Создать его?";
+                string caption = "Проверка наличия администратора";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        MainFrame.NavigationService.Navigate(pageRegistrationAdmininstrator);
+                        break;
+                    case MessageBoxResult.No:
+                        MainFrame.NavigationService.Navigate(pageMainPage);
+                        break;
+                }
+            }
+            else
+            {
+                MainFrame.Navigate(pageMainPage);
+            }
         }
+        //public void CheckedAdmininstration()
+        //{
+        //    var admin = connection.Admininstrator.ToList().Count();
+        //    if (admin==0)
+        //    {
+        //        string messageBoxText = "Не найден пользователь Администратор. Для полного использования " +
+        //           "функционала приложения нужно создать Администратора. Создать его?";
+        //        string caption = "Проверка наличия администратора";
+        //        MessageBoxButton button = MessageBoxButton.YesNo;
+        //        MessageBoxImage icon = MessageBoxImage.Warning;
+        //        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+        //        switch (result)
+        //        {
+        //            case MessageBoxResult.Yes:
+        //                MainFrame.NavigationService.Navigate(pageRegistrationAdmininstrator);
+        //                break;
+        //            case MessageBoxResult.No:
+        //                MainFrame.NavigationService.Navigate(pageMainPage);
+        //                break;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MainFrame.Navigate(pageMainPage);
+        //    }
+        //}
     }
 }
