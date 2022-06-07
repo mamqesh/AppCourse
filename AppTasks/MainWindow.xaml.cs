@@ -35,7 +35,6 @@ namespace AppTasks
         {
             
             InitializeComponent();
-            //CheckedAdmininstration();
             Instance = this;
             pageTeacherPage = new Pages.teacherPage();
             pageMainPage = new Pages.mainPage();
@@ -45,8 +44,6 @@ namespace AppTasks
             pageAddTestPage = new Pages.addTestPage();
             pageAddQuestionsPage = new Pages.addQuestionsPage();
             pageRegistrationAdmininstrator = new Pages.registrationAdmininstration();
-
-
             var admin = connection.Admininstrator.ToList().Count();
             if (admin == 0)
             {
@@ -71,31 +68,5 @@ namespace AppTasks
                 MainFrame.Navigate(pageMainPage);
             }
         }
-        //public void CheckedAdmininstration()
-        //{
-        //    var admin = connection.Admininstrator.ToList().Count();
-        //    if (admin==0)
-        //    {
-        //        string messageBoxText = "Не найден пользователь Администратор. Для полного использования " +
-        //           "функционала приложения нужно создать Администратора. Создать его?";
-        //        string caption = "Проверка наличия администратора";
-        //        MessageBoxButton button = MessageBoxButton.YesNo;
-        //        MessageBoxImage icon = MessageBoxImage.Warning;
-        //        MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
-        //        switch (result)
-        //        {
-        //            case MessageBoxResult.Yes:
-        //                MainFrame.NavigationService.Navigate(pageRegistrationAdmininstrator);
-        //                break;
-        //            case MessageBoxResult.No:
-        //                MainFrame.NavigationService.Navigate(pageMainPage);
-        //                break;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MainFrame.Navigate(pageMainPage);
-        //    }
-        //}
     }
 }

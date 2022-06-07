@@ -26,7 +26,6 @@ namespace AppTasks.Pages
         {
             InitializeComponent();
         }
-
         void ClearTextBox()
         {
             textBoxAdmLogin.Clear();
@@ -40,41 +39,48 @@ namespace AppTasks.Pages
             ClearTextBox();
             MainWindow.Instance.Close();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (textBoxAdmLogin.Text.Length > 0 && textBoxAdmRepeatLogin.Text.Length >0 && textBoxAdmPassword.Text.Length>0 && textBoxAdmRepeatPassword.Text.Length>0)
+            try
             {
-                if (textBoxAdmLogin.Text==textBoxAdmRepeatLogin.Text)
+                if (textBoxAdmLogin.Text.Length > 0 && textBoxAdmRepeatLogin.Text.Length > 0 && textBoxAdmPassword.Text.Length > 0 && textBoxAdmRepeatPassword.Text.Length > 0)
                 {
-                    if (textBoxAdmPassword.Text==textBoxAdmRepeatPassword.Text)
+                    if (textBoxAdmLogin.Text == textBoxAdmRepeatLogin.Text)
                     {
-                        string login = textBoxAdmLogin.Text.Trim();
-                        string password = textBoxAdmPassword.Text.Trim();
-                        Database.Admininstrator admininstrator = new Database.Admininstrator();
-                        admininstrator.NameAdmininstrator = login;
-                        admininstrator.Password = password;
-                        connection.Admininstrator.Add(admininstrator);
-                        int result= connection.SaveChanges();
-                        if (result>0)
+                        if (textBoxAdmPassword.Text == textBoxAdmRepeatPassword.Text)
                         {
-                            NavigationService.Navigate(MainWindow.pageAdministrationPage);
-                            MessageBox.Show("Администратор успешно зарегестрирован\nЛогин: "+login+"\nПароль: "+password);
+                            string login = textBoxAdmLogin.Text.Trim();
+                            string password = textBoxAdmPassword.Text.Trim();
+                            Database.Admininstrator admininstrator = new Database.Admininstrator();
+                            admininstrator.NameAdmininstrator = login;
+                            admininstrator.Password = password;
+                            connection.Admininstrator.Add(admininstrator);
+                            int result = connection.SaveChanges();
+                            if (result > 0)
+                            {
+                                NavigationService.Navigate(MainWindow.pageAdministrationPage);
+                                MessageBox.Show("Администратор успешно зарегестрирован\nЛогин: " + login + "\nПароль: " + password);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Пароли не совпадают");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Пароли не совпадают");
+                        MessageBox.Show("Логин не совпадает");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Логин не совпадает");
+                    MessageBox.Show("Не все поля заполнены");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Не все поля заполнены");
+
+                MessageBox.Show(ex.Message.ToString());
             }
         }
     }
