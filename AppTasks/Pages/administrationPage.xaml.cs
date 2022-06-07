@@ -29,7 +29,7 @@ namespace AppTasks.Pages
         public List<Database.Student> students { get; set; }
         public List<Database.Sex> sexes { get; set; }
         public List<Database.Group> groups { get; set; }
-        public List<Database.Speciality> specialities { get;set; }
+        public List<Database.Speciality> specialities { get; set; }
         public List<Database.Role> roles { get; set; }
         danil2Entities2 connection = new danil2Entities2();
         public administrationPage()
@@ -95,10 +95,18 @@ namespace AppTasks.Pages
         }
         private void Button_Click(object sender, RoutedEventArgs e)//ПРИМЕНИТЬ РЕДАКТИРОВАНИЕ
         {
-            int result = connection.SaveChanges();
-            if (result == 1)
+            try
             {
-                MessageBox.Show("Данные успешно отредактированы!");
+                int result = connection.SaveChanges();
+                if (result == 1)
+                {
+                    MessageBox.Show("Данные успешно отредактированы!");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
             }
         }
         private void listBoxTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)//КЛИК ПО ПРЕПОДАВАТЕЛЮ
@@ -118,53 +126,62 @@ namespace AppTasks.Pages
         }
         private void Button_Click_2(object sender, RoutedEventArgs e) //ЗАРЕГИСТРИРОВАТЬ СТУДЕНТА
         {
-            string surname = textBoxCreateSurnameStudent.Text.Trim();
-            string name = textBoxCreateNameStudent.Text.Trim();
-            string patronymic = textBoxCreatePatronymicStudent.Text.Trim();
-            string login = textBoxCreateStudentTicketStudent.Text.Trim();
-            string password = textBoxCreatePasswordStudent.Text.Trim();
-            void ClearTextBox()
+            try
             {
-                surname = "";
-                name = "";
-                patronymic = "";
-                login = "";
-                password = "";
-                textBoxCreateSurnameStudent.Clear();
-                textBoxCreateNameStudent.Clear();
-                textBoxCreatePatronymicStudent.Clear();
-                textBoxCreateStudentTicketStudent.Clear();
-                textBoxCreatePasswordStudent.Clear();
-                comboBoxSexStudent.SelectedIndex = -1;
-                comboBoxCreateSpecialityStudent.SelectedIndex = -1;
-            }
-            if (surname.Length == 0 || name.Length == 0 || patronymic.Length == 0 || login.Length == 0 || password.Length == 0)
-            {
-                MessageBox.Show("Вы ввели не все данные");
-            }
-            else
-            {
-                Database.Student student = new Database.Student();
-                student.StudentTicket = int.Parse(login);
-                student.Name = name;
-                student.Surname = surname;
-                student.Patronymic = patronymic;
-                student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
-                student.Group1 = comboBoxCreateGroupStudent.SelectedItem as Group;
-                student.Password = textBoxCreatePasswordStudent.Text.Trim();
-                connection.Student.Add(student);
-                int result = connection.SaveChanges();
-                if (result == 1)
+                string surname = textBoxCreateSurnameStudent.Text.Trim();
+                string name = textBoxCreateNameStudent.Text.Trim();
+                string patronymic = textBoxCreatePatronymicStudent.Text.Trim();
+                string login = textBoxCreateStudentTicketStudent.Text.Trim();
+                string password = textBoxCreatePasswordStudent.Text.Trim();
+                void ClearTextBox()
                 {
-                    ClearTextBox();
-                    MessageBox.Show("Студент успешно добавлен");
+                    surname = "";
+                    name = "";
+                    patronymic = "";
+                    login = "";
+                    password = "";
+                    textBoxCreateSurnameStudent.Clear();
+                    textBoxCreateNameStudent.Clear();
+                    textBoxCreatePatronymicStudent.Clear();
+                    textBoxCreateStudentTicketStudent.Clear();
+                    textBoxCreatePasswordStudent.Clear();
+                    comboBoxSexStudent.SelectedIndex = -1;
+                    comboBoxCreateSpecialityStudent.SelectedIndex = -1;
+                }
+                if (surname.Length == 0 || name.Length == 0 || patronymic.Length == 0 || login.Length == 0 || password.Length == 0)
+                {
+                    MessageBox.Show("Вы ввели не все данные");
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка добавления студента");
+                    Database.Student student = new Database.Student();
+                    student.StudentTicket = int.Parse(login);
+                    student.Name = name;
+                    student.Surname = surname;
+                    student.Patronymic = patronymic;
+                    student.Sex1 = comboBoxCreateSexStudent.SelectedItem as Sex;
+                    student.Group1 = comboBoxCreateGroupStudent.SelectedItem as Group;
+                    student.Password = textBoxCreatePasswordStudent.Text.Trim();
+                    connection.Student.Add(student);
+                    int result = connection.SaveChanges();
+                    if (result == 1)
+                    {
+                        ClearTextBox();
+                        MessageBox.Show("Студент успешно добавлен");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка добавления студента");
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
+
         private void comboBoxCreateGroupStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             textBoxCreatePasswordStudent.Text = "";
@@ -172,7 +189,7 @@ namespace AppTasks.Pages
         }
         private void comboBoxCreateSpecialityStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboBoxCreateSpecialityStudent.SelectedIndex!=-1)
+            if (comboBoxCreateSpecialityStudent.SelectedIndex != -1)
             {
                 comboBoxCreateGroupStudent.Items.Clear();
                 var speciality = comboBoxCreateSpecialityStudent.SelectedItem as Speciality;
@@ -180,63 +197,73 @@ namespace AppTasks.Pages
                 comboBoxCreateGroupStudent.GetBindingExpression(ComboBox.ItemsSourceProperty)?.UpdateTarget();
             }
         } // ДОБАВЛЕНИЕ НОМЕРА ГРУППЫ
-    private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
+        private void Button_Click_3(object sender, RoutedEventArgs e)//ЗАРЕГИСТРИРОВАТЬ УЧИТЕЛЯ
         {
-            string login = textBoxCreatePersonnelNumberTeacher.Text.Trim();
-            string name = textBoxCreateNameTeacher.Text.Trim();
-            string surname = textBoxCreateSurnameTeacher.Text.Trim();
-            string patronymic = textBoxCreatePatronymicTeacher.Text.Trim();
-            string sex = comboBoxCreateSexTeacher.Text.Trim();
-            string password = textBoxCreatePasswordTeacher.Text.Trim();
-            string role = comboBoxCreateRoleTeacher.Text.Trim();
-            void ClearTextBox()
+            try
             {
-                surname = "";
-                name = "";
-                patronymic = "";
-                login = "";
-                password = "";
-                sex = "";
-                role = "";
-                textBoxCreatePersonnelNumberTeacher.Clear();
-                textBoxCreateNameTeacher.Clear();
-                textBoxCreateSurnameTeacher.Clear();
-                textBoxCreatePatronymicTeacher.Clear();
-                comboBoxCreateSexTeacher.SelectedIndex = -1;
-                textBoxCreatePasswordTeacher.Clear();
-                comboBoxCreateRoleTeacher.SelectedIndex = -1;
-            }
-            if (login.Length == 0 || name.Length == 0 || surname.Length == 0 || patronymic.Length == 0 || password.Length == 0 || sex.Length == 0 || role.Length == 0)
-            {
-                MessageBox.Show("Вы ввели не все данные");
-                return;
-            }
-            else
-            {
-                if (comboBoxCreateSexTeacher.SelectedIndex < 0 || comboBoxCreateRoleTeacher.SelectedIndex < 0)
+                string login = textBoxCreatePersonnelNumberTeacher.Text.Trim();
+                string name = textBoxCreateNameTeacher.Text.Trim();
+                string surname = textBoxCreateSurnameTeacher.Text.Trim();
+                string patronymic = textBoxCreatePatronymicTeacher.Text.Trim();
+                string sex = comboBoxCreateSexTeacher.Text.Trim();
+                string password = textBoxCreatePasswordTeacher.Text.Trim();
+                string role = comboBoxCreateRoleTeacher.Text.Trim();
+                void ClearTextBox()
                 {
-                    MessageBox.Show("Данные заполнены не все");
-                    return;
+                    surname = "";
+                    name = "";
+                    patronymic = "";
+                    login = "";
+                    password = "";
+                    sex = "";
+                    role = "";
+                    textBoxCreatePersonnelNumberTeacher.Clear();
+                    textBoxCreateNameTeacher.Clear();
+                    textBoxCreateSurnameTeacher.Clear();
+                    textBoxCreatePatronymicTeacher.Clear();
+                    comboBoxCreateSexTeacher.SelectedIndex = -1;
+                    textBoxCreatePasswordTeacher.Clear();
+                    comboBoxCreateRoleTeacher.SelectedIndex = -1;
                 }
-                Database.Teacher teacher = new Database.Teacher();
-                teacher.PersonnelNumber = int.Parse(login);
-                teacher.Name = name;
-                teacher.Surname = surname;
-                teacher.Patronymic = patronymic;
-                teacher.Password = password;
-                teacher.Sex1 = comboBoxCreateSexTeacher.SelectedItem as Sex;
-                teacher.Role1 = comboBoxCreateRoleTeacher.SelectedItem as Role;
-                connection.Teacher.Add(teacher);
-                int result = connection.SaveChanges();
-                if (result == 1)
+                if (login.Length == 0 || name.Length == 0 || surname.Length == 0 || patronymic.Length == 0 || password.Length == 0 || sex.Length == 0 || role.Length == 0)
                 {
-                    ClearTextBox();
-                    MessageBox.Show("Преподаватель успешно добавлен");
+                    MessageBox.Show("Вы ввели не все данные");
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка добавления преподавателя");
+                    if (comboBoxCreateSexTeacher.SelectedIndex < 0 || comboBoxCreateRoleTeacher.SelectedIndex < 0)
+                    {
+                        MessageBox.Show("Данные заполнены не все");
+                        return;
+                    }
+                    Database.Teacher teacher = new Database.Teacher();
+                    teacher.PersonnelNumber = int.Parse(login);
+                    teacher.Name = name;
+                    teacher.Surname = surname;
+                    teacher.Patronymic = patronymic;
+                    teacher.Password = password;
+                    teacher.Sex1 = comboBoxCreateSexTeacher.SelectedItem as Sex;
+                    teacher.Role1 = comboBoxCreateRoleTeacher.SelectedItem as Role;
+                    connection.Teacher.Add(teacher);
+                    int result = connection.SaveChanges();
+
+
+                    if (result == 1)
+                    {
+                        ClearTextBox();
+                        MessageBox.Show("Преподаватель успешно добавлен");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка добавления преподавателя");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
             }
         }
         private void TabItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -266,7 +293,7 @@ namespace AppTasks.Pages
         private void Button_Click_4(object sender, RoutedEventArgs e)//СОЗДАТЬ ДОЛЖНОСТЬ
         {
             string roleTextBox = textBoxCreateRole.Text.Trim();
-            if (roleTextBox.Length==0)
+            if (roleTextBox.Length == 0)
             {
                 MessageBox.Show("Вы не ввели данные");
                 return;
@@ -304,80 +331,92 @@ namespace AppTasks.Pages
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)//СОЗДАТЬ ПРЕДМЕТ
         {
-            string subjectTextBox = textBoxCreateSubject.Text.Trim();
-            if (subjectTextBox.Length==0)
+            try
             {
-                MessageBox.Show("Вы не ввели данные");
-                return;
-            }
-            //ОГРАНИЧЕНИЕ
-            var subjects = connection.Subject.Where(s => s.SubjectName == subjectTextBox).FirstOrDefault();
-            if(subjects==null)
-            {
-                void ClearItem()
+                string subjectTextBox = textBoxCreateSubject.Text.Trim();
+                if (subjectTextBox.Length == 0)
                 {
-                    textBoxCreateSubject.Clear();
-                    subjectTextBox = "";
+                    MessageBox.Show("Вы не ввели данные");
+                    return;
                 }
-                Database.Subject subject = new Subject();
-                int subjectID = connection.Subject.ToList().Count() + 1;
-                subject.SubjectID = subjectID;
-                subject.SubjectName = subjectTextBox;
-                connection.Subject.Add(subject);
-                int result = connection.SaveChanges();
-                if (result > 0)
+                //ОГРАНИЧЕНИЕ
+                var subjects = connection.Subject.Where(s => s.SubjectName == subjectTextBox).FirstOrDefault();
+                if (subjects == null)
                 {
-                    MessageBox.Show("Предмет добавлен");
-                    ClearItem();
+                    void ClearItem()
+                    {
+                        textBoxCreateSubject.Clear();
+                        subjectTextBox = "";
+                    }
+                    Database.Subject subject = new Subject();
+                    int subjectID = connection.Subject.ToList().Count() + 1;
+                    subject.SubjectID = subjectID;
+                    subject.SubjectName = subjectTextBox;
+                    connection.Subject.Add(subject);
+                    int result = connection.SaveChanges();
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Предмет добавлен");
+                        ClearItem();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка добавления");
-                    ClearItem();
+                    MessageBox.Show("Предмет существует");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Предмет существует");
+
+                MessageBox.Show(ex.Message.ToString());
+                
             }
         }
         private void Button_Click_6(object sender, RoutedEventArgs e) //СОЗДАТЬ СПЕЦИАЛЬНОСТЬ
         {
-            string specialityTextBox = textBoxCreateRole.Text.Trim();
-            if (specialityTextBox.Length==0)
+            try
             {
-                MessageBox.Show("Вы не ввели данные");
-                return;
-            }
-            var specialities= connection.Speciality.Where(s => s.SpecialityName == specialityTextBox).FirstOrDefault();
-            if (specialities==null)
-            {
-                void ClearItem()
+                string specialityTextBox = textBoxCreateRole.Text.Trim();
+                if (specialityTextBox.Length == 0)
                 {
-                    textBoxCreateRole.Clear();
-                    specialityTextBox = "";
+                    MessageBox.Show("Вы не ввели данные");
+                    return;
                 }
-                Database.Speciality speciality = new Speciality();
-                int roleID = connection.Speciality.ToList().Count() + 1;
-                speciality.IDSpeciality = roleID;
-                speciality.SpecialityName = specialityTextBox;
-                connection.Speciality.Add(speciality);
-                int result = connection.SaveChanges();
-                if (result > 0)
+                var specialities = connection.Speciality.Where(s => s.SpecialityName == specialityTextBox).FirstOrDefault();
+                if (specialities == null)
                 {
-                    MessageBox.Show("Специальность добавлена");
-                    ClearItem();
+                    void ClearItem()
+                    {
+                        textBoxCreateRole.Clear();
+                        specialityTextBox = "";
+                    }
+                    Database.Speciality speciality = new Speciality();
+                    int roleID = connection.Speciality.ToList().Count() + 1;
+                    speciality.IDSpeciality = roleID;
+                    speciality.SpecialityName = specialityTextBox;
+                    connection.Speciality.Add(speciality);
+                    int result = connection.SaveChanges();
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Специальность добавлена");
+                        ClearItem();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка добавления");
+                        ClearItem();
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка добавления");
-                    ClearItem();
+                    MessageBox.Show("Специальность существует");
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Специальность существует");
-              
+
+                MessageBox.Show(ex.Message.ToString());
             }
         }
     }
