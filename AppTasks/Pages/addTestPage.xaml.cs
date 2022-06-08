@@ -154,58 +154,83 @@ namespace AppTasks.Pages
                     string option2 = textBoxOption2.Text.Trim();
                     string option3 = textBoxOption3.Text.Trim();
                     Database.Question question = new Database.Question();//НАЗВАНИЕ ВОПРОСА
-                    Database.OptionText optionText = new Database.OptionText();//ВАРИАНТЫ ОТВЕТА
+                   
                     if (option1.Length > 0 || option2.Length > 0 || option3.Length > 0)
                     {
                         if (radioButton1.IsChecked == false && radioButton2.IsChecked == false && radioButton3.IsChecked == false)
                         {
-                            MessageBox.Show("Выберите правильный ответ");
+                            MessageBox.Show("Выберите правильный ответ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
-                        if (MessageBox.Show("Вы действительно хотите добавить вопрос?", "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы действительно хотите добавить вопрос?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         {
                             int countID = connection.OptionText.ToList().Count();
                             listBoxQuestions.Items.Add(textBoxQuestion.Text);
+
                             if (radioButton1.IsChecked == true)
                             {
-                                optionText.IDOptionText = countID + 1;
-                                optionText.Answer = option1;
-                                optionText.TrueFalse = "True";
+                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                {
+                                    IDOptionText = countID + 1,
+                                    Answer = option1,
+                                    TrueFalse = "True"
+                                };
                                 connection.OptionText.Add(optionText);
+
+                                //optionText.IDOptionText = countID + 1;
+                                //optionText.Answer = option1;
+                                //optionText.TrueFalse = "True";
+                                //connection.OptionText.Add(optionText);
+                                //connection.SaveChanges();
                             }
                             if (radioButton1.IsChecked == false)
                             {
-                                optionText.IDOptionText = countID + 1;
-                                optionText.Answer = option1;
-                                optionText.TrueFalse = "False";
+                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                {
+                                   IDOptionText = countID + 1,
+                                   Answer = option1,
+                                    TrueFalse = "False"
+                                };
                                 connection.OptionText.Add(optionText);
                             }
                             if (radioButton2.IsChecked == true)
                             {
-                                optionText.IDOptionText = countID + 1;
-                                optionText.Answer = option2;
-                                optionText.TrueFalse = "True";
+                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                {
+                                    IDOptionText = countID + 2,
+                                    Answer = option2,
+                                    TrueFalse = "True"
+                                };
                                 connection.OptionText.Add(optionText);
                             }
                             if (radioButton2.IsChecked == false)
                             {
-                                optionText.IDOptionText = countID + 1;
-                                optionText.Answer = option2;
-                                optionText.TrueFalse = "False";
+                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                {
+                                    IDOptionText = countID + 2,
+                                    Answer = option2,
+                                    TrueFalse = "False"
+                                };
                                 connection.OptionText.Add(optionText);
                             }
                             if (radioButton3.IsChecked == true)
                             {
-                                optionText.IDOptionText = countID + 1;
-                                optionText.Answer = option3;
-                                optionText.TrueFalse = "True";
+                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                {
+                                    IDOptionText = countID + 3,
+                                    Answer = option3,
+                                    TrueFalse = "True"
+                                };
                                 connection.OptionText.Add(optionText);
                             }
                             if (radioButton3.IsChecked == false)
                             {
-                                optionText.IDOptionText = countID + 1;
-                                optionText.Answer = option3;
-                                optionText.TrueFalse = "False";
+                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                {
+                                    IDOptionText = countID + 3,
+                                    Answer = option3,
+                                    TrueFalse = "False"
+                                };
                                 connection.OptionText.Add(optionText);
                             }
                             question.QuestionsID = connection.Question.ToList().Count() + 1;
@@ -216,11 +241,7 @@ namespace AppTasks.Pages
                             int result = connection.SaveChanges();
                             if (result > 0)
                             {
-                                MessageBox.Show("Вопрос и варианты ответа успешно добавлены.");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Ошибка добавления");
+                                MessageBox.Show("Вопрос и варианты ответа успешно добавлены.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                         }
                         else
@@ -230,20 +251,20 @@ namespace AppTasks.Pages
                     }
                     else
                     {
-                        MessageBox.Show("Заполните все поля для ввода");
+                        MessageBox.Show("Заполните все поля для ввода", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Необходимо выбрать предмет");
+                    MessageBox.Show("Необходимо выбрать предмет", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(), "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
