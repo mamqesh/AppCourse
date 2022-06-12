@@ -176,12 +176,6 @@ namespace AppTasks.Pages
                                     TrueFalse = "True"
                                 };
                                 connection.OptionText.Add(optionText);
-
-                                //optionText.IDOptionText = countID + 1;
-                                //optionText.Answer = option1;
-                                //optionText.TrueFalse = "True";
-                                //connection.OptionText.Add(optionText);
-                                //connection.SaveChanges();
                             }
                             if (radioButton1.IsChecked == false)
                             {
