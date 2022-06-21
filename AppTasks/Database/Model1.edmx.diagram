@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="danil2Model.Student" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Subject" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="danil2Model.Teacher" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="danil2Model.Theme" Width="1.5" PointX="11.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="danil2Model.Theme" Width="1.5" PointX="12.125" PointY="8.375" IsExpanded="true" />
         <AssociationConnector Association="danil2Model.FK__Group__Specialit__267ABA7A" ManuallyRouted="false" />
         <AssociationConnector Association="danil2Model.FK__Lesson__Group__440B1D61" ManuallyRouted="false" />
         <AssociationConnector Association="danil2Model.FK__Student__Group__2C3393D0" ManuallyRouted="false" />

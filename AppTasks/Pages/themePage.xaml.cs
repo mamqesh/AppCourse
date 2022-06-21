@@ -74,7 +74,9 @@ namespace AppTasks.Pages
             radioButton1.Content = questionOptions[themeIndex].option[0].OptionText.Answer;
             radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
             radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
+            clearRadioButton();
         }
+        
         private void Button_Click(object sender, RoutedEventArgs e)//ДАЛЕЕ
         {
             if (radioButton1.IsChecked==true||radioButton2.IsChecked==true||radioButton3.IsChecked==true)
