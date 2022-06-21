@@ -10,15 +10,28 @@
       Title="teacherPage" Background="White">
 
     <Grid>
-        <Button Content="ДОБАВИТЬ ТЕСТ" HorizontalAlignment="Left" FontSize="25" Margin="534,88,0,0" VerticalAlignment="Top" Width="396" Height="81" Click="Button_Click"/>
-        <Button Content="ОЦЕНКИ" FontSize="25" HorizontalAlignment="Left" Margin="955,88,0,0" VerticalAlignment="Top" Width="292" Height="81"/>
-        <Label x:Name="labelPersonnelNumber" Content="Role+ID" FontWeight="Bold" FontSize="35"  HorizontalAlignment="Right" Margin="0,0,1711,567" VerticalAlignment="Bottom" Height="56" Width="150" RenderTransformOrigin="0.333,0.643"/>
-        <Label x:Name="labelName" Content="Name" FontSize="30" HorizontalAlignment="Right" Margin="0,569,1477,0" VerticalAlignment="Top" Height="56" Width="384" RenderTransformOrigin="0.52,0.714"/>
-        <Label x:Name="labelSurname" Content="Surname" FontSize="30" HorizontalAlignment="Right" Margin="0,513,1477,0" VerticalAlignment="Top" Height="56" Width="384"/>
-        <Label x:Name="labelPatronymic" Content="Patronymic" FontSize="30" HorizontalAlignment="Right" Margin="0,625,1477,0" VerticalAlignment="Top" Height="56" Width="384"/>
-        <Image x:Name="imageWindow" Margin="0,0,1577,652" Source="/AppTasks;component/man.png" Stretch="Fill" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom"/>
-        <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1"/>
-        <Label x:Name="labelRole" Content="{Binding Role1.RoleName}" FontSize="30" HorizontalAlignment="Right" Margin="0,686,1477,0" VerticalAlignment="Top" Height="56" Width="384">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="205*"/>
+            <ColumnDefinition Width="729*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="449*"/>
+            <RowDefinition Height="66*"/>
+            <RowDefinition Height="59*"/>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="66*"/>
+            <RowDefinition Height="62*"/>
+            <RowDefinition Height="317*"/>
+        </Grid.RowDefinitions>
+        <Button Content="ДОБАВИТЬ ТЕСТ" HorizontalAlignment="Left" FontSize="25" Margin="72,88,0,0" VerticalAlignment="Top" Width="396" Height="81" Click="Button_Click" Grid.Column="2"/>
+        <Label x:Name="labelPersonnelNumber" Content="Role+ID" FontWeight="Bold" FontSize="35"  HorizontalAlignment="Right" Margin="0,0,253,2" VerticalAlignment="Bottom" Height="56" Width="150" RenderTransformOrigin="0.333,0.643" Grid.Row="1" Grid.Column="1"/>
+        <Label x:Name="labelName" Content="Name" FontSize="30" HorizontalAlignment="Right" Margin="0,5,19,0" VerticalAlignment="Top" Height="56" Width="384" RenderTransformOrigin="0.52,0.714" Grid.Row="4" Grid.Column="1"/>
+        <Label x:Name="labelSurname" Content="Surname" FontSize="30" HorizontalAlignment="Right" Margin="0,5,19,0" VerticalAlignment="Top" Height="56" Width="384" Grid.Row="3" Grid.Column="1"/>
+        <Label x:Name="labelPatronymic" Content="Patronymic" FontSize="30" HorizontalAlignment="Right" Margin="0,0,19,0" VerticalAlignment="Top" Height="56" Width="384" Grid.Row="5" Grid.Column="1"/>
+        <Image x:Name="imageWindow" Margin="0,0,119,21" Source="/AppTasks;component/man.png" Stretch="Fill" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom" Grid.Column="1"/>
+        <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1" Grid.ColumnSpan="2"/>
+        <Label x:Name="labelRole" Content="{Binding Role1.RoleName}" FontSize="30" HorizontalAlignment="Right" Margin="0,3,19,0" VerticalAlignment="Top" Height="56" Width="384" FontWeight="Bold" Grid.Row="2" Grid.Column="1">
         </Label>
 
     </Grid>

@@ -56,7 +56,6 @@ namespace AppTasks.Pages
             radioButton3.IsChecked = false;
             NavigationService.GoBack();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)//СОЗДАТЬ ТЕМУ С ВОПРОСАМИ
         {
             try
@@ -66,14 +65,14 @@ namespace AppTasks.Pages
                     string themeName = textBoxAddNameTheme.Text.Trim();
                     if (themeName.Length == 0)
                     {
-                        MessageBox.Show("Вы не ввели название темы");
+                        MessageBox.Show("Вы не ввели название темы", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
                     else
                     {
                         if (listBoxSubject.SelectedItem == null)
                         {
-                            MessageBox.Show("Вы не выбрали предмет");
+                            MessageBox.Show("Вы не выбрали предмет", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                             return;
                         }
                         else
@@ -87,7 +86,7 @@ namespace AppTasks.Pages
                             if (result > 0)
                             {
                                 textBoxAddNameTheme.Clear();
-                                MessageBox.Show("Тема предмета успешно добавлена");
+                                MessageBox.Show("Тема предмета успешно добавлена", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                                 if (listBoxSubject.SelectedIndex != -1)
                                 {
                                     listBoxTheme.Items.Clear();
@@ -108,23 +107,20 @@ namespace AppTasks.Pages
                                         }
                                     }
                                 }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Ошбика добавление темы предмета");
+
                             }
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Выберите предмет и введите название темы");
+                    MessageBox.Show("Выберите предмет и введите название темы", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         void ClearQuestionOption()
@@ -148,105 +144,158 @@ namespace AppTasks.Pages
             {
                 if (listBoxSubject.SelectedIndex != -1)
                 {
-
-                    string questionName = textBoxQuestion.Text.Trim();
-                    string option1 = textBoxOption1.Text.Trim();
-                    string option2 = textBoxOption2.Text.Trim();
-                    string option3 = textBoxOption3.Text.Trim();
-                    Database.Question question = new Database.Question();//НАЗВАНИЕ ВОПРОСА
-                   
-                    if (option1.Length > 0 || option2.Length > 0 || option3.Length > 0)
+                    if (listBoxTheme.SelectedIndex != -1)
                     {
-                        if (radioButton1.IsChecked == false && radioButton2.IsChecked == false && radioButton3.IsChecked == false)
+                        string questionName = textBoxQuestion.Text.Trim();
+                        string option1 = textBoxOption1.Text.Trim();
+                        string option2 = textBoxOption2.Text.Trim();
+                        string option3 = textBoxOption3.Text.Trim();
+                        if (option1.Length > 0 || option2.Length > 0 || option3.Length > 0)
                         {
-                            MessageBox.Show("Выберите правильный ответ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
-                        if (MessageBox.Show("Вы действительно хотите добавить вопрос?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            int countID = connection.OptionText.ToList().Count();
-                            listBoxQuestions.Items.Add(textBoxQuestion.Text);
+                            if (radioButton1.IsChecked == false && radioButton2.IsChecked == false && radioButton3.IsChecked == false)
+                            {
+                                MessageBox.Show("Выберите правильный ответ", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                return;
+                            }
+                            if (MessageBox.Show("Вы действительно хотите добавить вопрос?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                            {
+                                int countID = connection.OptionText.ToList().Count();
+                                int questionID = connection.Question.ToList().Count();
+                                int optionID = connection.Question.ToList().Count();
 
-                            if (radioButton1.IsChecked == true)
-                            {
-                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                Database.Question question = new Database.Question//НАЗВАНИЕ ВОПРОСА
                                 {
-                                    IDOptionText = countID + 1,
-                                    Answer = option1,
-                                    TrueFalse = "True"
+                                    QuestionsID = questionID + 1,
+                                    Question1 = questionName,
+                                    Teacher = teacherPesonalNumber,
+                                    Subject1 = listBoxSubject.SelectedItem as Database.Subject
                                 };
-                                connection.OptionText.Add(optionText);
-                            }
-                            if (radioButton1.IsChecked == false)
-                            {
-                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                connection.Question.Add(question);
+                                if (radioButton1.IsChecked == true)
                                 {
-                                   IDOptionText = countID + 1,
-                                   Answer = option1,
-                                    TrueFalse = "False"
-                                };
-                                connection.OptionText.Add(optionText);
-                            }
-                            if (radioButton2.IsChecked == true)
-                            {
-                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    {
+                                        IDOptionText = countID + 1,
+                                        Answer = option1,
+                                        TrueFalse = "True"
+                                    };
+                                    connection.OptionText.Add(optionText);
+                                    Database.Option option = new Database.Option()//ВОПРОС С ОТВЕТАМИ 
+                                    {
+                                        Option1 = countID + 1,
+                                        Question = questionID + 1,
+                                        Theme1 = listBoxTheme.SelectedItem as Database.Theme
+                                    };
+                                    connection.Option.Add(option);
+                                }
+                                if (radioButton1.IsChecked == false)
                                 {
-                                    IDOptionText = countID + 2,
-                                    Answer = option2,
-                                    TrueFalse = "True"
-                                };
-                                connection.OptionText.Add(optionText);
-                            }
-                            if (radioButton2.IsChecked == false)
-                            {
-                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    {
+                                        IDOptionText = countID + 1,
+                                        Answer = option1,
+                                        TrueFalse = "False"
+                                    };
+                                    connection.OptionText.Add(optionText);
+                                    Database.Option option = new Database.Option()//ВОПРОС С ОТВЕТАМИ 
+                                    {
+                                        Option1 = countID + 1,
+                                        Question = questionID + 1,
+                                        Theme1 = listBoxTheme.SelectedItem as Database.Theme
+                                    };
+                                    connection.Option.Add(option);
+                                    Console.WriteLine(countID);
+                                }
+                                if (radioButton2.IsChecked == true)
                                 {
-                                    IDOptionText = countID + 2,
-                                    Answer = option2,
-                                    TrueFalse = "False"
-                                };
-                                connection.OptionText.Add(optionText);
-                            }
-                            if (radioButton3.IsChecked == true)
-                            {
-                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    {
+                                        IDOptionText = countID + 2,
+                                        Answer = option2,
+                                        TrueFalse = "True"
+                                    };
+                                    connection.OptionText.Add(optionText);
+                                    Database.Option option = new Database.Option()//ВОПРОС С ОТВЕТАМИ 
+                                    {
+                                        Option1 = countID + 2,
+                                        Question = questionID + 1,
+                                        Theme1 = listBoxTheme.SelectedItem as Database.Theme
+                                    };
+                                    connection.Option.Add(option);
+                                }
+                                if (radioButton2.IsChecked == false)
                                 {
-                                    IDOptionText = countID + 3,
-                                    Answer = option3,
-                                    TrueFalse = "True"
-                                };
-                                connection.OptionText.Add(optionText);
-                            }
-                            if (radioButton3.IsChecked == false)
-                            {
-                                Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    {
+                                        IDOptionText = countID + 2,
+                                        Answer = option2,
+                                        TrueFalse = "False"
+                                    };
+                                    connection.OptionText.Add(optionText);
+                                    Database.Option option = new Database.Option()//ВОПРОС С ОТВЕТАМИ 
+                                    {
+                                        Option1 = countID + 2,
+                                        Question = questionID + 1,
+                                        Theme1 = listBoxTheme.SelectedItem as Database.Theme
+                                    };
+                                    connection.Option.Add(option);
+                                }
+                                if (radioButton3.IsChecked == true)
                                 {
-                                    IDOptionText = countID + 3,
-                                    Answer = option3,
-                                    TrueFalse = "False"
-                                };
-                                connection.OptionText.Add(optionText);
+                                    Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    {
+                                        IDOptionText = countID + 3,
+                                        Answer = option3,
+                                        TrueFalse = "True"
+                                    };
+                                    connection.OptionText.Add(optionText);
+                                    Database.Option option = new Database.Option()//ВОПРОС С ОТВЕТАМИ 
+                                    {
+                                        Option1 = countID + 3,
+                                        Question = questionID + 1,
+                                        Theme1 = listBoxTheme.SelectedItem as Database.Theme
+                                    };
+                                    connection.Option.Add(option);
+                                }
+                                if (radioButton3.IsChecked == false)
+                                {
+                                    Database.OptionText optionText = new Database.OptionText//ВАРИАНТЫ ОТВЕТА
+                                    {
+                                        IDOptionText = countID + 3,
+                                        Answer = option3,
+                                        TrueFalse = "False"
+                                    };
+                                    connection.OptionText.Add(optionText);
+                                    Database.Option option = new Database.Option()//ВОПРОС С ОТВЕТАМИ 
+                                    {
+                                        Option1 = countID + 3,
+                                        Question = questionID + 1,
+                                        Theme1 = listBoxTheme.SelectedItem as Database.Theme
+                                    };
+                                    connection.Option.Add(option);
+                                }
+                                int result = connection.SaveChanges();
+                                if (result > 0)
+                                {
+                                    listBoxQuestions.Items.Add(textBoxQuestion.Text);
+                                    ClearQuestionOption();
+                                    MessageBox.Show("Вопрос и варианты ответа успешно добавлены.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
                             }
-                            question.QuestionsID = connection.Question.ToList().Count() + 1;
-                            question.Question1 = questionName;
-                            question.Teacher = teacherPesonalNumber;
-                            question.Subject1 = listBoxSubject.SelectedItem as Database.Subject;
-                            connection.Question.Add(question);
-                            int result = connection.SaveChanges();
-                            if (result > 0)
+                            else
                             {
-                                MessageBox.Show("Вопрос и варианты ответа успешно добавлены.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                return;
                             }
                         }
                         else
                         {
+                            MessageBox.Show("Заполните все поля для ввода", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                             return;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Заполните все поля для ввода", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
+                        MessageBox.Show("Выберите тему для вопроса", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
@@ -258,7 +307,7 @@ namespace AppTasks.Pages
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString(), "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -276,6 +325,7 @@ namespace AppTasks.Pages
         {
             if (listBoxSubject.SelectedIndex != -1)
             {
+                listBoxQuestions.Items.Clear();
                 listBoxTheme.Items.Clear();
                 var subject = listBoxSubject.SelectedItem as Subject;
                 var selectedSubject = connection.Subject.ToList();
@@ -294,6 +344,29 @@ namespace AppTasks.Pages
                     }
                 }
             }
+        }
+        private void listBoxTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (listBoxTheme.SelectedIndex != -1)
+            //{
+            //    listBoxQuestions.Items.Clear();
+            //    var theme = listBoxTheme.SelectedItem as Theme;
+            //    var loadQuestions = connection.Question.ToList();
+            //    var loadThemes = connection.Theme.ToList();
+            //    foreach (var _loadThemes in loadThemes)
+            //    {
+            //        foreach (var _loadQuestions in loadQuestions)
+            //        {
+            //            if (theme != null)
+            //            {
+            //                if (theme.ThemeID == _loadThemes.ThemeID)
+            //                {
+            //                    listBoxQuestions.Items.Add(_loadQuestions.Question1);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 }

@@ -100,13 +100,12 @@ namespace AppTasks.Pages
                 int result = connection.SaveChanges();
                 if (result == 1)
                 {
-                    MessageBox.Show("Данные успешно отредактированы!");
+                    MessageBox.Show("Данные успешно отредактированы!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void listBoxTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)//КЛИК ПО ПРЕПОДАВАТЕЛЮ
@@ -150,7 +149,7 @@ namespace AppTasks.Pages
                 }
                 if (surname.Length == 0 || name.Length == 0 || patronymic.Length == 0 || login.Length == 0 || password.Length == 0)
                 {
-                    MessageBox.Show("Вы ввели не все данные");
+                    MessageBox.Show("Вы ввели не все данные", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
@@ -167,18 +166,14 @@ namespace AppTasks.Pages
                     if (result == 1)
                     {
                         ClearTextBox();
-                        MessageBox.Show("Студент успешно добавлен");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка добавления студента");
+                        MessageBox.Show("Студент успешно добавлен", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -227,14 +222,14 @@ namespace AppTasks.Pages
                 }
                 if (login.Length == 0 || name.Length == 0 || surname.Length == 0 || patronymic.Length == 0 || password.Length == 0 || sex.Length == 0 || role.Length == 0)
                 {
-                    MessageBox.Show("Вы ввели не все данные");
+                    MessageBox.Show("Вы ввели не все данные", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
                 else
                 {
                     if (comboBoxCreateSexTeacher.SelectedIndex < 0 || comboBoxCreateRoleTeacher.SelectedIndex < 0)
                     {
-                        MessageBox.Show("Данные заполнены не все");
+                        MessageBox.Show("Данные заполнены не все", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
                     Database.Teacher teacher = new Database.Teacher();
@@ -247,23 +242,17 @@ namespace AppTasks.Pages
                     teacher.Role1 = comboBoxCreateRoleTeacher.SelectedItem as Role;
                     connection.Teacher.Add(teacher);
                     int result = connection.SaveChanges();
-
-
                     if (result == 1)
                     {
                         ClearTextBox();
-                        MessageBox.Show("Преподаватель успешно добавлен");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка добавления преподавателя");
+                        MessageBox.Show("Преподаватель успешно добавлен", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(),"Ошибка",MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void TabItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -292,41 +281,40 @@ namespace AppTasks.Pages
         } //ПОИСК СТУДЕНТОВ
         private void Button_Click_4(object sender, RoutedEventArgs e)//СОЗДАТЬ ДОЛЖНОСТЬ
         {
-            string roleTextBox = textBoxCreateRole.Text.Trim();
-            if (roleTextBox.Length == 0)
+            try
             {
-                MessageBox.Show("Вы не ввели данные");
-                return;
-            }
-            //ОГРАНИЧЕНИЕ
-            var roles = connection.Role.Where(r => r.RoleName == roleTextBox).FirstOrDefault();
-            if (roles == null)
-            {
-                void ClearItem()
+                string roleTextBox = textBoxCreateRole.Text.Trim();
+                if (roleTextBox.Length == 0)
                 {
-                    textBoxCreateRole.Clear();
-                    roleTextBox = "";
+                    MessageBox.Show("Вы не ввели данные", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
-                Database.Role role = new Role();
-                int roleID = connection.Role.ToList().Count() + 1;
-                role.RoleID = roleID;
-                role.RoleName = roleTextBox;
-                connection.Role.Add(role);
-                int result = connection.SaveChanges();
-                if (result > 0)
+                //ОГРАНИЧЕНИЕ
+                var roles = connection.Role.Where(r => r.RoleName == roleTextBox).FirstOrDefault();
+                if (roles == null)
                 {
-                    MessageBox.Show("Специальность добавлена");
-                    ClearItem();
-                }
-                else
-                {
-                    ClearItem();
-                    MessageBox.Show("Ошибка добавления");
+                    void ClearItem()
+                    {
+                        textBoxCreateRole.Clear();
+                        roleTextBox = "";
+                    }
+                    Database.Role role = new Role();
+                    int roleID = connection.Role.ToList().Count() + 1;
+                    role.RoleID = roleID;
+                    role.RoleName = roleTextBox;
+                    connection.Role.Add(role);
+                    int result = connection.SaveChanges();
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Специальность добавлена", "Предупреждние", MessageBoxButton.OK, MessageBoxImage.Information);
+                        ClearItem();
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Должность уже существует");
+
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)//СОЗДАТЬ ПРЕДМЕТ
@@ -356,19 +344,15 @@ namespace AppTasks.Pages
                     int result = connection.SaveChanges();
                     if (result > 0)
                     {
-                        MessageBox.Show("Предмет добавлен");
+                        MessageBox.Show("Предмет добавлен", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                         ClearItem();
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Предмет существует");
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 
             }
         }
@@ -379,7 +363,7 @@ namespace AppTasks.Pages
                 string specialityTextBox = textBoxCreateRole.Text.Trim();
                 if (specialityTextBox.Length == 0)
                 {
-                    MessageBox.Show("Вы не ввели данные");
+                    MessageBox.Show("Вы не ввели данные", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
                 var specialities = connection.Speciality.Where(s => s.SpecialityName == specialityTextBox).FirstOrDefault();
@@ -401,22 +385,12 @@ namespace AppTasks.Pages
                         MessageBox.Show("Специальность добавлена");
                         ClearItem();
                     }
-                    else
-                    {
-                        MessageBox.Show("Ошибка добавления");
-                        ClearItem();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Специальность существует");
-
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

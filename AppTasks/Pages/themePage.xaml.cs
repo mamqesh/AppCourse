@@ -32,7 +32,6 @@ namespace AppTasks.Pages
         public themePage()
         {
             InitializeComponent();
-            SetTheme(1);
         }
         public void SetTheme(int themeID)
         {
@@ -62,6 +61,12 @@ namespace AppTasks.Pages
                 radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
             }
         }
+        void clearRadioButton()
+        {
+            radioButton1.IsChecked = null;
+            radioButton2.IsChecked = null;
+            radioButton3.IsChecked = null;
+        }
         void nextQuestion()
         {
             themeIndex++;
@@ -69,9 +74,6 @@ namespace AppTasks.Pages
             radioButton1.Content = questionOptions[themeIndex].option[0].OptionText.Answer;
             radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
             radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
-            radioButton1.IsChecked = null;
-            radioButton2.IsChecked = null;
-            radioButton3.IsChecked = null;
         }
         private void Button_Click(object sender, RoutedEventArgs e)//ДАЛЕЕ
         {
@@ -81,7 +83,7 @@ namespace AppTasks.Pages
             }
             else
             {
-                MessageBox.Show("Вам необходимо выбрать ответ");
+                MessageBox.Show("Вам необходимо выбрать ответ", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
           
         }

@@ -11,29 +11,27 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="180*"/>
-            <RowDefinition Height="190*"/>
-            <RowDefinition Height="170*"/>
-            <RowDefinition Height="68*"/>
+            <RowDefinition Height="104*"/>
+            <RowDefinition Height="311*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="64*"/>
+            <RowDefinition Height="64*"/>
             <RowDefinition Height="61*"/>
-            <RowDefinition Height="51*"/>
-            <RowDefinition Height="180*"/>
-            <RowDefinition Height="180*"/>
+            <RowDefinition Height="300*"/>
+            <RowDefinition Height="111*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="458*"/>
+            <ColumnDefinition Width="547*"/>
+            <ColumnDefinition Width="595*"/>
+            <ColumnDefinition Width="320*"/>
         </Grid.ColumnDefinitions>
-        <Label Name="labelRole" Content="Role+ID" FontWeight="Bold" FontSize="35"  HorizontalAlignment="Right" Margin="0,0,133,60" VerticalAlignment="Bottom" Height="56" Width="150" RenderTransformOrigin="0.333,0.643" Grid.Row="2"/>
-        <Label Name="labelName" Content="Name" FontSize="30" HorizontalAlignment="Right" Margin="0,6,219,0" VerticalAlignment="Top" Height="56" Width="384" RenderTransformOrigin="0.52,0.714" Grid.Row="3" Grid.ColumnSpan="2"/>
-        <Label Name="labelSurname" Content="Surname" FontSize="30" HorizontalAlignment="Right" Margin="0,110,219,0" VerticalAlignment="Top" Grid.Row="2" Height="56" Width="384" Grid.ColumnSpan="2"/>
-        <Label Name="labelPatronymic" Content="Patronymic" FontSize="30" HorizontalAlignment="Right" Margin="0,5,219,0" VerticalAlignment="Top" Grid.Row="4" Height="56" Width="384" Grid.ColumnSpan="2"/>
-        <ListBox Name="listBoxSubject" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Height="836" Margin="116,0,0,86" VerticalAlignment="Bottom" 
-                 Width="524" Grid.RowSpan="8" Grid.ColumnSpan="2" SelectionChanged="listBoxSubject_SelectionChanged" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}">
+        <Label Name="labelRole" Content="Role+ID" FontWeight="Bold" FontSize="35"  HorizontalAlignment="Right" Margin="0,0,271,0" VerticalAlignment="Bottom" Height="56" Width="150" RenderTransformOrigin="0.333,0.643" Grid.Row="2"/>
+        <Label Name="labelName" Content="Name" FontSize="30" HorizontalAlignment="Right" Margin="0,6,37,0" VerticalAlignment="Top" Height="56" Width="384" RenderTransformOrigin="0.52,0.714" Grid.Row="4"/>
+        <Label Name="labelSurname" Content="Surname" FontSize="30" HorizontalAlignment="Right" Margin="0,5,37,0" VerticalAlignment="Top" Grid.Row="3" Height="56" Width="384"/>
+        <Label Name="labelPatronymic" Content="Patronymic" FontSize="30" HorizontalAlignment="Right" Margin="0,5,37,0" VerticalAlignment="Top" Grid.Row="5" Height="56" Width="384"/>
+        <ListBox Name="listBoxSubject" FontSize="25" HorizontalAlignment="Center" Margin="13,16,10,13" 
+                 Width="524" Grid.RowSpan="6" SelectionChanged="listBoxSubject_SelectionChanged" Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}" Grid.Column="1" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
@@ -43,9 +41,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button Content="ВЫХОД" FontSize="20" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150" Height="54" Click="Button_Click_1"/>
-        <Image Name="imageWindow" Margin="0,0,297,145" Grid.RowSpan="3" Source="/AppTasks;component/man.png" Stretch="Fill" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom"/>
-        <ListBox x:Name="listBoxTheme" Grid.Column="3" FontSize="25" HorizontalAlignment="Left" Height="836" Margin="38,0,0,86" VerticalAlignment="Bottom" 
-            Width="524" Grid.RowSpan="8" Grid.ColumnSpan="2" SelectionChanged="listBoxTheme_SelectionChanged" >
+        <Image Name="imageWindow" Margin="0,0,115,20" Source="/AppTasks;component/man.png" Stretch="Fill" HorizontalAlignment="Right" Width="284" Height="275" VerticalAlignment="Bottom" Grid.Row="1"/>
+        <ListBox x:Name="listBoxTheme" Grid.Column="2" FontSize="25" HorizontalAlignment="Center" Margin="31,16,40,13" 
+            Width="524" Grid.RowSpan="6" SelectionChanged="listBoxTheme_SelectionChanged" Grid.Row="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock><Run Text="{Binding ThemeName}"/></TextBlock>

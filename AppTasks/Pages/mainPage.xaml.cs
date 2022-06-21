@@ -27,8 +27,8 @@ namespace AppTasks.Pages
         {
             InitializeComponent();
 #if DEBUG
-            textBoxLogin.Text = "1163";
-            passwordBoxPassword.Password = "qwerty123";
+            textBoxLogin.Text = "1019";
+            passwordBoxPassword.Password = "group163";
 #endif
         }
         void ClearElements()

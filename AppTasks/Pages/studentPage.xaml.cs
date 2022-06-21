@@ -72,7 +72,8 @@ namespace AppTasks.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             ClearElements();
-            NavigationService.GoBack();        }
+            NavigationService.GoBack();
+        }
         private void listBoxSubject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             listBoxTheme.SelectedIndex = -1;
@@ -82,7 +83,7 @@ namespace AppTasks.Pages
             {
                 if (subject.Theme.Count != 0)
                 {
-                   var theme = subject.Theme.ToList();
+                    var theme = subject.Theme.ToList();
                     foreach (var themes in theme)
                     {
                         listBoxTheme.Items.Add(themes);
@@ -92,18 +93,20 @@ namespace AppTasks.Pages
         }
         private void listBoxTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите пройти тестирование?", "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (listBoxTheme.SelectedIndex>=0)
             {
-                NavigationService.Navigate(MainWindow.pageThemePage);
-                if (listBoxTheme.SelectedItem!=null)
+                if (MessageBox.Show("Вы действительно хотите пройти тестирование?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    MainWindow.pageThemePage.SetTheme(((Theme)listBoxTheme.SelectedItem).ThemeID);
+                    NavigationService.Navigate(MainWindow.pageThemePage);
+                    if (listBoxTheme.SelectedItem != null)
+                    {
+                        MainWindow.pageThemePage.SetTheme(((Theme)listBoxTheme.SelectedItem).ThemeID);
+                    }
                 }
-            }
-            else
-            {
-                listBoxTheme.SelectedIndex = -1;
-                return;
+                else
+                {
+                    listBoxTheme.SelectedIndex = -1;
+                }
             }
         }
     }
