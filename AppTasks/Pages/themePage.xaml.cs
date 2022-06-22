@@ -29,9 +29,11 @@ namespace AppTasks.Pages
         danil2Entities2 connection = new danil2Entities2();
         List<QuestionOption> questionOptions;
         int themeIndex = 0;
+        int trueQuestion = 0;
         public themePage()
         {
             InitializeComponent();
+            clearRadioButton();
         }
         public void SetTheme(int themeID)
         {
@@ -49,7 +51,7 @@ namespace AppTasks.Pages
             {
                 var optionTheme = connection.Option.Where(o => o.Theme == themeID && o.Question == _questions.Key).ToList();
 
-               
+
                 questionOptions.Add(new QuestionOption()
                 {
                     question = _questions.Value,
@@ -60,34 +62,62 @@ namespace AppTasks.Pages
                 radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
                 radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
             }
+            clearRadioButton();
         }
         void clearRadioButton()
         {
-            radioButton1.IsChecked = null;
-            radioButton2.IsChecked = null;
-            radioButton3.IsChecked = null;
+            radioButton1.IsChecked = false;
+            radioButton2.IsChecked = false;
+            radioButton3.IsChecked = false;
         }
         void nextQuestion()
         {
-            themeIndex++;
-            labelNameQuestion.Content = questionOptions[themeIndex].question;
-            radioButton1.Content = questionOptions[themeIndex].option[0].OptionText.Answer;
-            radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
-            radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
-            clearRadioButton();
+            try
+            {
+                themeIndex++;
+                labelNameQuestion.Content = questionOptions[themeIndex].question;
+                radioButton1.Content = questionOptions[themeIndex].option[0].OptionText.Answer;
+                radioButton2.Content = questionOptions[themeIndex].option[1].OptionText.Answer;
+                radioButton3.Content = questionOptions[themeIndex].option[2].OptionText.Answer;
+                if (questionOptions[themeIndex].option[2].OptionText.TrueFalse == "True" && radioButton3.IsChecked == true)
+                {
+                    trueQuestion++;
+                }
+                clearRadioButton();
+            }
+            catch (Exception)
+            {
+                MainWindow.pageEndTestPage.SetTrueFalseQuestion(trueQuestion, themeIndex);
+                themeIndex = 0;
+                trueQuestion = 0;
+                NavigationService.Navigate(MainWindow.pageEndTestPage);
+            }
+
         }
-        
+
         private void Button_Click(object sender, RoutedEventArgs e)//ДАЛЕЕ
         {
-            if (radioButton1.IsChecked==true||radioButton2.IsChecked==true||radioButton3.IsChecked==true)
+            if (radioButton1.IsChecked == true || radioButton2.IsChecked == true || radioButton3.IsChecked == true)
             {
+                if (questionOptions[themeIndex].option[0].OptionText.TrueFalse == "True" && radioButton1.IsChecked == true)
+                {
+                    trueQuestion++;
+                }
+                if (questionOptions[themeIndex].option[1].OptionText.TrueFalse == "True" && radioButton2.IsChecked == true)
+                {
+                    trueQuestion++;
+                }
+                if (questionOptions[themeIndex].option[2].OptionText.TrueFalse == "True" && radioButton3.IsChecked == true)
+                {
+                    trueQuestion++;
+                }
                 nextQuestion();
             }
             else
             {
                 MessageBox.Show("Вам необходимо выбрать ответ", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-          
+
         }
     }
 }

@@ -26,11 +26,11 @@
         </Grid.RowDefinitions>
         <Label Name="labelNameQuestion" Content="Blush projecting others meant warmly longer outlived others tried." FontWeight="Bold" FontSize="25" HorizontalAlignment="Center" Margin="24,10,324,10" VerticalAlignment="Center" Height="96" Width="1572" Grid.Row="1" Grid.ColumnSpan="2"/>
         <RadioButton Name="radioButton1" Content="Excuse painful months lady followed terms reasonably roused unpacked belonging. Spring extensive gone rapturous. " FontSize="25" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1"
-                     Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" Height="40"/>
+                     Style="{StaticResource MaterialDesignAccentRadioButton}" Height="40"/>
         <RadioButton Name="radioButton2" Content="Just maids plate. Half world shall four. Pressed were terms than what offence.  " FontSize="25" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1"
-            Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" Height="40"/>
+            Style="{StaticResource MaterialDesignAccentRadioButton}" Height="40"/>
         <RadioButton Name="radioButton3" Content="Unknown perceived new considered husband match only then stimulated sixteen " FontSize="25" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="5" Grid.Column="1"
-            Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" Height="40"/>
+            Style="{StaticResource MaterialDesignAccentRadioButton}" Height="40"/>
         <Image Margin="0,10,0,62" Grid.Row="2" Source="/AppTasks;component/PfBnQ.png" Stretch="Fill" Grid.ColumnSpan="2"/>
         <Button Content="ДАЛЕЕ" FontSize="20" HorizontalAlignment="Center" Height="60" Margin="1398,10,106,104" VerticalAlignment="Center" Width="254" Grid.Column="1" Grid.Row="7" Click="Button_Click" />
         <Image Margin="98,10,10,10" Grid.Row="3" Source="/AppTasks;component/vopros_znak.png" Stretch="Fill"/>

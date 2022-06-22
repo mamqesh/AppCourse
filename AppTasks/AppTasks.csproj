@@ -148,6 +148,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\endTestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\mainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +179,9 @@
     </Compile>
     <Compile Include="Pages\administrationPage.xaml.cs">
       <DependentUpon>administrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\endTestPage.xaml.cs">
+      <DependentUpon>endTestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\mainPage.xaml.cs">
       <DependentUpon>mainPage.xaml</DependentUpon>

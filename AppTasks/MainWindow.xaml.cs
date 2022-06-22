@@ -29,6 +29,7 @@ namespace AppTasks
         public static Pages.themePage pageThemePage;
         public static Pages.addTestPage pageAddTestPage;
         public static Pages.registrationAdmininstration pageRegistrationAdmininstrator;
+        public static Pages.endTestPage pageEndTestPage;
         public static MainWindow Instance;
         public MainWindow()
         {
@@ -42,6 +43,7 @@ namespace AppTasks
             pageThemePage = new Pages.themePage();
             pageAddTestPage = new Pages.addTestPage();
             pageRegistrationAdmininstrator = new Pages.registrationAdmininstration();
+            pageEndTestPage = new Pages.endTestPage();
             var admin = connection.Admininstrator.ToList().Count();
             if (admin == 0)
             {

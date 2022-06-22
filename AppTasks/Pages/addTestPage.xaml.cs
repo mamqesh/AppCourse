@@ -85,8 +85,6 @@ namespace AppTasks.Pages
                             int result = connection.SaveChanges();
                             if (result > 0)
                             {
-                                textBoxAddNameTheme.Clear();
-                                MessageBox.Show("Тема предмета успешно добавлена", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                                 if (listBoxSubject.SelectedIndex != -1)
                                 {
                                     listBoxTheme.Items.Clear();
@@ -107,7 +105,8 @@ namespace AppTasks.Pages
                                         }
                                     }
                                 }
-
+                                textBoxAddNameTheme.Clear();
+                                MessageBox.Show("Тема предмета успешно добавлена", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                         }
                     }
@@ -295,7 +294,7 @@ namespace AppTasks.Pages
                     }
                     else
                     {
-                        MessageBox.Show("Выберите тему для вопроса", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Выберите или создайте тему для вопроса", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else

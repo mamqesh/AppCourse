@@ -71,8 +71,11 @@ namespace AppTasks.Pages
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ClearElements();
-            NavigationService.GoBack();
+            if (MessageBox.Show("Вы действительно хотите выйти из учетной записи?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                ClearElements();
+                NavigationService.Navigate(MainWindow.pageMainPage);
+            }
         }
         private void listBoxSubject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -101,6 +104,8 @@ namespace AppTasks.Pages
                     if (listBoxTheme.SelectedItem != null)
                     {
                         MainWindow.pageThemePage.SetTheme(((Theme)listBoxTheme.SelectedItem).ThemeID);
+                        listBoxSubject.SelectedIndex = -1;
+                        listBoxTheme.SelectedIndex = -1;
                     }
                 }
                 else
