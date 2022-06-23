@@ -23,6 +23,7 @@
         </Grid.RowDefinitions>
         <Border Background="LightGray" CornerRadius="25" BorderThickness="2" BorderBrush="#FF673AB7" HorizontalAlignment="Center" Width="890" Margin="26,13,20,6" Grid.Column="1" Grid.Row="1" >
             <Grid>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="192*"/>
                     <RowDefinition Height="91*"/>

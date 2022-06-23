@@ -166,6 +166,8 @@ namespace AppTasks.Pages
                     if (result == 1)
                     {
                         ClearTextBox();
+                        students = connection.Student.ToList();
+                        LoadUsersStudent();
                         MessageBox.Show("Студент успешно добавлен", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
@@ -245,6 +247,8 @@ namespace AppTasks.Pages
                     if (result == 1)
                     {
                         ClearTextBox();
+                        teachers = connection.Teacher.ToList();
+                        LoadUsersTeacher();
                         MessageBox.Show("Преподаватель успешно добавлен", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
@@ -306,6 +310,8 @@ namespace AppTasks.Pages
                     int result = connection.SaveChanges();
                     if (result > 0)
                     {
+                        LoadRoleTeacher();
+                        comboBoxCreateRoleTeacher.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
                         MessageBox.Show("Специальность добавлена", "Предупреждние", MessageBoxButton.OK, MessageBoxImage.Information);
                         ClearItem();
                     }
@@ -324,7 +330,7 @@ namespace AppTasks.Pages
                 string subjectTextBox = textBoxCreateSubject.Text.Trim();
                 if (subjectTextBox.Length == 0)
                 {
-                    MessageBox.Show("Вы не ввели данные");
+                    MessageBox.Show("Вы не ввели данные","Предупреждение",MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
                 //ОГРАНИЧЕНИЕ
@@ -360,36 +366,37 @@ namespace AppTasks.Pages
         {
             try
             {
-                string specialityTextBox = textBoxCreateRole.Text.Trim();
-                if (specialityTextBox.Length == 0)
+                string createSpeciality = textBoxCreateSpeciality.Text.Trim();
+                void ClearItem()
+                {
+                    textBoxCreateRole.Clear();
+                    textBoxCreateSpeciality.Text = "";
+                }
+                if (textBoxCreateSpeciality.Text.Length == 0)
                 {
                     MessageBox.Show("Вы не ввели данные", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
-                var specialities = connection.Speciality.Where(s => s.SpecialityName == specialityTextBox).FirstOrDefault();
+                var specialities = connection.Speciality.Where(s => s.SpecialityName == textBoxCreateSpeciality.Text).FirstOrDefault();
                 if (specialities == null)
                 {
-                    void ClearItem()
-                    {
-                        textBoxCreateRole.Clear();
-                        specialityTextBox = "";
-                    }
                     Database.Speciality speciality = new Speciality();
                     int roleID = connection.Speciality.ToList().Count() + 1;
                     speciality.IDSpeciality = roleID;
-                    speciality.SpecialityName = specialityTextBox;
+                    speciality.SpecialityName = createSpeciality;
                     connection.Speciality.Add(speciality);
                     int result = connection.SaveChanges();
                     if (result > 0)
                     {
-                        MessageBox.Show("Специальность добавлена");
+                        LoadSpecialityStudent();
+                        comboBoxCreateSpecialityStudent.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
+                        MessageBox.Show("Специальность добавлена", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
                         ClearItem();
                     }
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }

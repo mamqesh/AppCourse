@@ -160,7 +160,7 @@
                     <TabControl HorizontalAlignment="Left" Height="890" Margin="1098,70,0,0" VerticalAlignment="Top" Width="790" Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem Header="Создать специальность">
                             <Grid>
-                                <TextBox x:Name="textBoxCreateSpeciality" HorizontalAlignment="Center" Height="59" Margin="34,50,60,643" TextWrapping="Wrap" VerticalAlignment="Center" Width="606" 
+                                <TextBox Name="textBoxCreateSpeciality" HorizontalAlignment="Center" Height="59" Margin="34,50,60,643" TextWrapping="Wrap" VerticalAlignment="Center" Width="606" 
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Наименование специальности" FontSize="20"/>
                                 <Button Content="Создать специальность" HorizontalAlignment="Center" Margin="404,767,10,10" VerticalAlignment="Center" Width="286" Height="65" FontSize="20" Click="Button_Click_6"/>
 
