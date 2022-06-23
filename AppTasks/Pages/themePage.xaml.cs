@@ -94,7 +94,6 @@ namespace AppTasks.Pages
             }
 
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)//ДАЛЕЕ
         {
             if (radioButton1.IsChecked == true || radioButton2.IsChecked == true || radioButton3.IsChecked == true)
